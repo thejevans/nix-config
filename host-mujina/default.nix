@@ -13,8 +13,8 @@
     # Include common configuration
     ../host-common.nix
 
-    # Include desktop configuration
-    ../home-desktop/plasma.nix
+    # Include userspace configuration
+    ../userspace-desktop/plasma.nix
   ];
 
   networking.hostName = "mujina"; # Define your hostname.
