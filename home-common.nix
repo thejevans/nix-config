@@ -21,6 +21,7 @@
 
   imports = [
     ./home-application/neovim
+    ./home-application/starship.nix
   ];
 
   home.packages = with pkgs; [
@@ -32,5 +33,23 @@
     ripgrep
     fd
     pfetch
+
+    # fish plugins
+    fishPlugins.done
+    fishPlugins.fzf-fish
+    fishPlugins.forgit
+    fishPlugins.hydro
+    fzf
+    fishPlugins.grc
+    grc
   ];
+
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      function fish_greeting
+          pfetch
+      end
+    '';
+  };
 }

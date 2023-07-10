@@ -7,5 +7,8 @@
     description = "John Evans";
     home = "/home/thejevans";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.fish;
   };
+
+  programs.fish.enable = true;
 }
