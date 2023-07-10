@@ -19,8 +19,17 @@
   # changes in each release.
   home.stateVersion = "23.05";
 
+  imports = [
+    ./home-application/neovim
+  ];
+
   home.packages = with pkgs; [
-    neovim
     github-cli
+    gcc
+    zig
+    nodejs
+    xclip
+    ripgrep
+    fd
   ];
 }
