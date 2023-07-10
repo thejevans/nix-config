@@ -18,8 +18,8 @@ in {
 
     plugins = with pkgs.vimPlugins; [
       # color scheme
-      gruvbox-material
-      #doom-one-nvim # don't know the actual name
+      ( lua_plugin lualine-nvim "lualine-nvim" )
+      ( lua_plugin material-nvim "material-nvim" )
 
       # cmp dependencies
       cmp-nvim-lsp
@@ -43,9 +43,9 @@ in {
 
       neovim-sensible
       nvim-dap
-      #nvim-neoclip # don't know the actual name
+      nvim-neoclip-lua
       nvim-surround
-      #nvim-tree # don't know the actual name
+      nvim-tree-lua
       popup-nvim
     ];
   };
