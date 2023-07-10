@@ -6,6 +6,9 @@
   home.packages = with pkgs; [
     firefox
     alacritty
+    darktable
+    webcord
+    hydroxide
   ];
 
 }

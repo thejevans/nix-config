@@ -31,5 +31,6 @@
     xclip
     ripgrep
     fd
+    pfetch
   ];
 }

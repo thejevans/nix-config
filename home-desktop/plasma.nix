@@ -7,6 +7,8 @@
   home.packages = with pkgs; [
     kate
     plasma-browser-integration
+    element-desktop
+    dolphin
   ];
 
   # Enable Firefox integration
