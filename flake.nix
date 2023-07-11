@@ -9,17 +9,15 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, home-manager }: let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {inherit system;};
-  in {
+  outputs = { self, nixpkgs, nixos-hardware, home-manager }:
+
+  {
     nixosConfigurations = {
       mujina = nixpkgs.lib.nixosSystem {
-        inherit pkgs system;
+        system = "x86_64-linux";
 
         modules = [
           ./host-mujina
-          # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
           nixos-hardware.nixosModules.framework-12th-gen-intel
 
           home-manager.nixosModules.home-manager

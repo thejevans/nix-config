@@ -9,6 +9,8 @@
     darktable
     webcord
     hydroxide
+    obsidian
+    nextcloud-client
   ];
 
   programs.alacritty = {
