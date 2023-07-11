@@ -2,9 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
+  # Add support for backlight
+  boot.kernelParams = [ "acpi_backlight=video" ];
+
   # Include the results of the hardware scan.
   imports = [
     # Include the results of the hardware scan.
