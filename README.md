@@ -4,7 +4,8 @@ My configuration for the Nix package manager and operating system.
 
 hostnames are chosen using the random yokai generator [here](https://yokai.com?redirect_to=random)
 
-`mujina` = My Framework Laptop
+`mujina` = My 12th-gen Framework Laptop
+`kotobuki` = Hannah's mid-2013 Macbook Air
 
 # Organizational structure:
 

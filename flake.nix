@@ -28,6 +28,23 @@
           }
         ];
       };
+
+     kotobuki = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+
+        modules = [
+          ./host-kotobuki
+          nixos-hardware.nixosModules.apple-macbook-air-4
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useUserPackages = true;
+            home-manager.useGlobalPkgs = true;
+            home-manager.users.thejevans = import ./home-desktop/plasma.nix;
+          }
+        ];
+      };
+
     };
   };
 }
