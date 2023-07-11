@@ -2,7 +2,10 @@
 
 {
   # Import common home configuration.
-  imports = [ ../home-common.nix ];
+  imports = [
+    ../home-common.nix
+    ../home-application/cachix.nix
+  ];
   home.packages = with pkgs; [
     firefox
     alacritty
@@ -11,6 +14,9 @@
     hydroxide
     obsidian
     nextcloud-client
+
+    # devenv
+    cachix
   ];
 
   programs.alacritty = {
