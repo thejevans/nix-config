@@ -56,6 +56,8 @@
     wget
     git
     gnumake
+    usbutils
+    pciutils
   ];
   
   # Some programs need SUID wrappers, can be configured further or are

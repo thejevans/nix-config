@@ -33,6 +33,7 @@
     ripgrep
     fd
     pfetch
+    sqlite
 
     # fish plugins
     fishPlugins.done
