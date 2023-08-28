@@ -58,6 +58,11 @@
     gnumake
     usbutils
     pciutils
+    lshw
+    powertop
+    bash
+    btop
+    ntfs3g
   ];
   
   # Some programs need SUID wrappers, can be configured further or are
