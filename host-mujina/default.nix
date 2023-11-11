@@ -26,4 +26,8 @@
 
   # Set your time zone.
   time.timeZone = "America/Denver";
+
+  # power management
+  services.auto-cpufreq.enable = true;
+  services.thermald.enable = true;
 }

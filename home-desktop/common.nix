@@ -6,6 +6,7 @@
     ../home-common.nix
     ../home-application/cachix.nix
   ];
+
   home.packages = with pkgs; [
     firefox
     alacritty

@@ -47,7 +47,10 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [ "electron-24.8.6" ];
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -63,6 +66,7 @@
     bash
     btop
     ntfs3g
+    home-manager
   ];
   
   # Some programs need SUID wrappers, can be configured further or are
