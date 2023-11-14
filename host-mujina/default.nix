@@ -14,7 +14,7 @@
     ../host-common.nix
 
     # Include userspace configuration
-    ../userspace-desktop/plasma.nix
+    ../userspace-desktop/sway.nix
   ];
 
   networking.hostName = "mujina"; # Define your hostname.

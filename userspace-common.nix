@@ -6,9 +6,12 @@
     isNormalUser = true;
     description = "John Evans";
     home = "/home/thejevans";
+    group = "thejevans";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
   };
+
+  users.groups.thejevans = {};
 
   programs.fish.enable = true;
 }
