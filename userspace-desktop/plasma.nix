@@ -8,8 +8,13 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.displayManager.sddm.wayland.enable = true;
+  services.xserver.displayManager.defaultSession = "plasma";
+  services.xserver.desktopManager.plasma6.enable = true;
+
+  # Automatically authenticate KDEWallet
+  # DOESN'T WORK
+  # security.pam.services.login.enableKwallet = true;
 
   # Open ports for KDEConnect
   networking.firewall.allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
@@ -23,4 +28,5 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
+
 }
