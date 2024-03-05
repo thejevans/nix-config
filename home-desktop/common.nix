@@ -15,6 +15,7 @@
     hydroxide
     obsidian
     nextcloud-client
+    schildichat-desktop-wayland
 
     # devenv
     cachix
