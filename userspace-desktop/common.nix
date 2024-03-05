@@ -3,5 +3,5 @@
 {
   # Import userspace-common.
   imports = [ ../userspace-common.nix ];
-  environment.variables.MOZ_USE_XINPUT2 = 1;
+  environment.variables.MOZ_USE_XINPUT2 = "1";
 }
