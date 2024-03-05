@@ -14,7 +14,7 @@
     ../host-common.nix
 
     # Include userspace configuration
-    ../userspace-desktop/sway.nix
+    ../userspace-desktop/plasma.nix
   ];
 
   networking.hostName = "mujina"; # Define your hostname.
@@ -30,4 +30,7 @@
   # power management
   services.auto-cpufreq.enable = true;
   services.thermald.enable = true;
+
+  services.avahi.enable = true;
+  networking.firewall.allowedTCPPorts = [ 8010 ];
 }

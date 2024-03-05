@@ -1,14 +1,14 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nur, ... }:
 
 {
   # Import common home configuration.
   imports = [
     ../home-common.nix
     ../home-application/cachix.nix
+    ../home-application/firefox
   ];
 
   home.packages = with pkgs; [
-    firefox
     alacritty
     darktable
     webcord

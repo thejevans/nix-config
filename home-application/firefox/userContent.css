@@ -1,0 +1,14 @@
+@-moz-document regexp("moz-extension://.+/sidebar/sidebar.html.*") {
+  :root,
+  #background {
+    background-color: rgb(40, 42, 48); /* https://github.com/piroor/treestyletab/blob/0eede581d763f92344fe64b1c042839f3b8ca955/webextensions/resources/ui-color.css#L198 */
+  }
+}
+
+@-moz-document url("about:newtab") {
+body { background-color: #011326 !important;}
+}
+
+@-moz-document url(chrome://browser/content/browser.xul) {
+browser[type="content-primary"] {background: #011326 !important}
+}
