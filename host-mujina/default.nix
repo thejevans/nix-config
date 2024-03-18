@@ -14,7 +14,7 @@
     ../host-common.nix
 
     # Include userspace configuration
-    ../userspace-desktop/plasma.nix
+    ../userspace-desktop/cosmic.nix
   ];
 
   networking.hostName = "mujina"; # Define your hostname.

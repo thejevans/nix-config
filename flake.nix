@@ -41,7 +41,7 @@
           {
             home-manager.useUserPackages = true;
             home-manager.useGlobalPkgs = true;
-            home-manager.users.thejevans = import ./home-desktop/plasma.nix;
+            home-manager.users.thejevans = import ./home-desktop/common.nix;
             home-manager.extraSpecialArgs = { inherit inputs; };
           }
         ];
