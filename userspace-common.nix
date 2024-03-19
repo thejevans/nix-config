@@ -7,7 +7,7 @@
     description = "John Evans";
     home = "/home/thejevans";
     group = "thejevans";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "uinput" ];
     shell = pkgs.fish;
   };
 
