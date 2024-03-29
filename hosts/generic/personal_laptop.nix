@@ -5,11 +5,7 @@
   options = {};
 
   config = {
-    services = {
-      auto-cpufreq.enable = true;
-      thermald.enable = true;
-      avahi.enable = true;
-    };
+    services.avahi.enable = true;
 
     nixosModules.firefox.enable = true;
 
@@ -27,7 +23,6 @@
       usbutils
       pciutils
       lshw
-      powertop
       wget
       git
       gnumake
