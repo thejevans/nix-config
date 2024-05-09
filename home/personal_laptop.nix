@@ -1,7 +1,7 @@
 { inputs, pkgs, ... }: {
 
   imports = [
-    ./dynamic.nix
+    ./global.nix
     inputs.self.outputs.homeManagerModules.default
   ];
 
@@ -12,12 +12,18 @@
     programs.home-manager.enable = true;
 
     homeManagerModules = {
+      # gui
       firefox.enable = true;
+      alacritty.enable = true;
+
+      # cli
       neovim.enable = true;
       starship.enable = true;
+      fish.enable = true;
     };
 
     home.packages = with pkgs; [
+      # cli
       github-cli
       gcc
       zig
@@ -25,43 +31,18 @@
       xclip
       ripgrep
       fd
-      pfetch
       sqlite
 
-      # fish plugins
-      fishPlugins.done
-      fishPlugins.fzf-fish
-      fishPlugins.forgit
-      fishPlugins.hydro
-      fzf
-      fishPlugins.grc
-      grc
-
-      alacritty
+      # gui
       darktable
       webcord
       hydroxide
       obsidian
       nextcloud-client
+
       # devenv
       cachix
     ];
-
-    programs.fish = {
-      enable = true;
-      interactiveShellInit = ''
-        function fish_greeting
-            pfetch
-        end
-      '';
-    };
-
-    programs.alacritty = {
-      enable = true;
-      settings.shell.program = "fish";
-      settings.window.decorations = "none";
-      settings.font.size = 20;
-    };
   };
 
 }

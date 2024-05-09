@@ -64,7 +64,7 @@
 
     modules = [
       ./hosts/${host}/configuration.nix
-      ./hosts/generic/dynamic.nix
+      ./hosts/generic/global.nix
       ( ./hosts/generic + "/${deviceClass}.nix" )
       ./nixosModules
 

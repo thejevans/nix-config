@@ -9,7 +9,10 @@
   config = {
     services.avahi.enable = true;
 
-    nixosModules.firefox.enable = true;
+    nixosModules = {
+      firefox.enable = true;
+      fish.enable = true;
+    };
 
     # Allow unfree packages
     nixpkgs.config = {
@@ -17,11 +20,8 @@
       permittedInsecurePackages = [ "electron-24.8.6" ];
     };
 
-    users.users.${config.globalConfig.user}.shell = pkgs.fish;
-
-    programs.fish.enable = true;
-
     environment.systemPackages = with pkgs; [
+      # cli
       usbutils
       pciutils
       lshw
@@ -31,6 +31,8 @@
       bash
       btop
       ntfs3g
+
+      # gui
       sleek
       obsidian
     ];
