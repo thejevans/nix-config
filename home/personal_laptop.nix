@@ -60,6 +60,7 @@
       enable = true;
       settings.shell.program = "fish";
       settings.window.decorations = "none";
+      settings.font.size = 20;
     };
   };
 

@@ -1,13 +1,13 @@
-{ inputs, host, user, fullName, timeZone, desktopEnvironment, stateVersion, pkgs, ... }: {
+{ pkgs, config, ... }: {
 
   imports = [];
 
   options = {};
 
   config = {
-    time.timeZone = "${timeZone}";
+    time.timeZone = "${config.globalConfig.timeZone}";
 
-    networking.hostName = "${host}"             ;
+    networking.hostName = "${config.globalConfig.host}";
 
     # Select internationalisation properties.
     i18n.defaultLocale = "en_US.UTF-8";
@@ -25,15 +25,15 @@
     };
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
-    users.users."${user}" = {
+    users.users."${config.globalConfig.user}" = {
       isNormalUser = true;
-      description = "${fullName}";
-      home = "/home/${user}";
-      group = "${user}";
+      description = "${config.globalConfig.fullName}";
+      home = "/home/${config.globalConfig.user}";
+      group = "${config.globalConfig.user}";
       extraGroups = [ "networkmanager" "wheel" "uinput" ];
     };
 
-    nixosModules.${desktopEnvironment}.enable = true;
+    nixosModules.${config.globalConfig.desktopEnvironment}.enable = true;
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
@@ -41,16 +41,19 @@
     # this value at the release version of the first install of this system.
     # Before changing this value read the documentation for this option
     # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-    system.stateVersion = "${stateVersion}"; # Did you read the comment?
+    system.stateVersion = "${config.globalConfig.stateVersion}"; # Did you read the comment?
 
-    users.groups.${user} = {};
+    users.groups.${config.globalConfig.user} = {};
 
     # Enable flakes.
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+    environment.sessionVariables.FLAKE = "/home/${config.globalConfig.user}/git_repos/nix-config";
+
     environment.systemPackages = with pkgs; [
       vim
       home-manager
+      nh
     ];
   };
 }

@@ -1,4 +1,6 @@
-{ inputs, user, pkgs, lib, config, ... }: {
+{ config, pkgs, lib, inputs, ... }:
+
+{
 
   imports = [];
 
@@ -15,7 +17,7 @@
       permittedInsecurePackages = [ "electron-24.8.6" ];
     };
 
-    users.users.${user}.shell = pkgs.fish;
+    users.users.${config.globalConfig.user}.shell = pkgs.fish;
 
     programs.fish.enable = true;
 
@@ -29,6 +31,8 @@
       bash
       btop
       ntfs3g
+      sleek
+      obsidian
     ];
 
     # Enable networking

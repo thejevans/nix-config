@@ -1,4 +1,4 @@
-{ inputs, user, pkgs, lib, config, ... }: {
+{ pkgs, lib, inputs, ... }: {
 
   imports = [
     ./hardware-configuration.nix
@@ -73,5 +73,7 @@
     };
 
     services.thermald.enable = true;
+    services.power-profiles-daemon.enable = false;
+    services.fwupd.enable = true;
   };
 }

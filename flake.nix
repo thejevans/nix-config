@@ -18,32 +18,65 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixos-cosmic, nixos-hardware, home-manager, nur, ... }: let
+  outputs = {
+    self,
+    nixpkgs,
+    nixos-cosmic,
+    nixos-hardware,
+    home-manager,
+    nur,
+    ...
+  }@inputs: let
+
+  globalConfig = { pkgs, lib, ... }: {
+    options.globalConfig = {
+      stateVersion = lib.mkOption { type = lib.types.string; };
+      timeZone = lib.mkOption { type = lib.types.string; };
+      fullName = lib.mkOption { type = lib.types.string; };
+      user = lib.mkOption { type = lib.types.string; };
+      host = lib.mkOption { type = lib.types.string; };
+
+      deviceClass = lib.mkOption {
+        type = lib.types.enum [ "personal_laptop" ];
+        default = "personal_laptop";
+      };
+
+      desktopEnvironment = lib.mkOption {
+        type = lib.types.enum [ "plasma6" "cosmic" ];
+        default = "plasma6";
+      };
+    };
+  };
 
   nixosConfiguration = {
     system,
-    host,
-    user,
-    fullName,
-    timeZone,
-    desktopEnvironment,
-    homeConfig,
     stateVersion,
+    desktopEnvironment,
+    timeZone,
+    fullName,
+    user,
+    host,
+    deviceClass,
   }: nixpkgs.lib.nixosSystem {
-
     inherit system;
 
-    specialArgs = {
-      inherit homeConfig inputs host user fullName timeZone desktopEnvironment stateVersion;
-    };
+    specialArgs = { inherit inputs; };
 
     modules = [
       ./hosts/${host}/configuration.nix
       ./hosts/generic/dynamic.nix
-      ( ./hosts/generic + "/${homeConfig}.nix" )
+      ( ./hosts/generic + "/${deviceClass}.nix" )
       ./nixosModules
 
       { nixpkgs.overlays = [ nur.overlay ]; }
+
+      {
+        imports = [ globalConfig ];
+        config.globalConfig = {
+          inherit stateVersion timeZone fullName user host;
+          inherit deviceClass desktopEnvironment;
+        };
+      }
 
       home-manager.nixosModules.home-manager {
         home-manager.extraSpecialArgs = {
@@ -52,12 +85,12 @@
 
         home-manager.useUserPackages = true;
         home-manager.useGlobalPkgs = true;
-        home-manager.users.${user} = import ( ./home + "/${homeConfig}.nix" );
+        home-manager.users.${user} = import ( ./home + "/${deviceClass}.nix" );
       }
     ];
-
   };
-  in{
+
+  in {
 
     nixosConfigurations = {
 
@@ -68,7 +101,7 @@
         fullName = "John Evans";
         timeZone = "America/Denver";
         desktopEnvironment = "cosmic";
-        homeConfig = "personal_laptop";
+        deviceClass = "personal_laptop";
         stateVersion = "23.05";
       };
 
@@ -79,7 +112,7 @@
         full-name = "John Evans";
         time-zone = "America/Denver";
         desktopEnvironment = "plasma6";
-        homeConfig = "personal_laptop";
+        deviceClass = "personal_laptop";
         stateVersion = "23.05";
       };
 
