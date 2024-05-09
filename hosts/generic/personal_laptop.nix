@@ -12,6 +12,7 @@
     nixosModules = {
       firefox.enable = true;
       fish.enable = true;
+      gaming.enable = true;
     };
 
     # Allow unfree packages

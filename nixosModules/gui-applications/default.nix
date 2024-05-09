@@ -2,6 +2,7 @@
 
   imports = [
     ./firefox.nix
+    ./gaming.nix
   ];
 
   options = {};

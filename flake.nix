@@ -45,6 +45,11 @@
         type = lib.types.enum [ "plasma6" "cosmic" ];
         default = "plasma6";
       };
+
+      gpu = lib.mkOption {
+        type = lib.types.enum [ "amdgpu" "nvidia" "integrated" ];
+        default = "integrated";
+      };
     };
   };
 
@@ -57,6 +62,7 @@
     user,
     host,
     deviceClass,
+    gpu,
   }: nixpkgs.lib.nixosSystem {
     inherit system;
 
@@ -74,7 +80,7 @@
         imports = [ globalConfig ];
         config.globalConfig = {
           inherit stateVersion timeZone fullName user host;
-          inherit deviceClass desktopEnvironment;
+          inherit deviceClass desktopEnvironment gpu;
         };
       }
 
@@ -103,6 +109,7 @@
         desktopEnvironment = "cosmic";
         deviceClass = "personal_laptop";
         stateVersion = "23.05";
+        gpu = "integrated";
       };
 
       kotobuki = nixosConfiguration {
@@ -114,6 +121,7 @@
         desktopEnvironment = "plasma6";
         deviceClass = "personal_laptop";
         stateVersion = "23.05";
+        gpu = "integrated";
       };
 
     };
