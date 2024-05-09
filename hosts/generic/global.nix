@@ -45,6 +45,11 @@
 
     users.groups.${config.globalConfig.user} = {};
 
+    nix.settings.trusted-users = [
+      "root"
+      "@wheel"
+    ];
+
     # Enable flakes.
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
