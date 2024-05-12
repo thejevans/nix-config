@@ -37,7 +37,7 @@
       host = lib.mkOption { type = lib.types.string; };
 
       deviceClass = lib.mkOption {
-        type = lib.types.enum [ "personal_laptop" ];
+        type = lib.types.enum [ "personal_laptop" "personal_desktop" ];
         default = "personal_laptop";
       };
 
@@ -116,12 +116,24 @@
         system = "x86_64-linux";
         host = "kotobuki";
         user = "thejevans";
-        full-name = "John Evans";
-        time-zone = "America/Denver";
+        fullName = "John Evans";
+        timeZone = "America/Denver";
         desktopEnvironment = "plasma6";
         deviceClass = "personal_laptop";
         stateVersion = "23.05";
         gpu = "integrated";
+      };
+
+      kubikajiri = nixosConfiguration {
+        system = "x86_64-linux";
+        host = "kubikajiri";
+        user = "thejevans";
+        fullName = "John Evans";
+        timeZone = "America/Denver";
+        desktopEnvironment = "plasma6";
+        deviceClass = "personal_desktop";
+        stateVersion = "23.11";
+        gpu = "amdgpu";
       };
 
     };
