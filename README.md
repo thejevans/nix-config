@@ -21,6 +21,7 @@ hostnames are chosen using the random yokai generator [here](https://yokai.com?r
 ### CLI Applications
 
 - [fish.nix](./nixosModules/cli-applications/fish.nix)
+- [ld.nix](./nixosModules/cli-applications/ld.nix)
 
 ### GUI Applications
 

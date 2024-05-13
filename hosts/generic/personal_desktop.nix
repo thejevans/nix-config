@@ -13,6 +13,7 @@
       firefox.enable = true;
       fish.enable = true;
       gaming.enable = true;
+      ld.enable = true;
     };
 
     # Allow unfree packages
@@ -39,7 +40,11 @@
       obsidian
       vlc
       ghostwriter
-      openrgb-with-all-plugins
+      newsflash
+      chromium
+
+      # currently broken upstream
+      #openrgb-with-all-plugins
     ];
 
     # Enable networking

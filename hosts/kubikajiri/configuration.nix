@@ -13,5 +13,9 @@
 
     hardware.bluetooth.enable = true;
     hardware.bluetooth.powerOnBoot = true;
+
+    boot.extraModprobeConfig = ''
+      options snd slots=snd-usb-audio
+    '';
   };
 }

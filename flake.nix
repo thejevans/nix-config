@@ -6,6 +6,7 @@
     nur.url = "github:nix-community/NUR";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nix-alien.url = "github:thiagokokada/nix-alien";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -30,6 +31,7 @@
 
   globalConfig = { pkgs, lib, ... }: {
     options.globalConfig = {
+      system = lib.mkOption { type = lib.types.string; };
       stateVersion = lib.mkOption { type = lib.types.string; };
       timeZone = lib.mkOption { type = lib.types.string; };
       fullName = lib.mkOption { type = lib.types.string; };
@@ -80,7 +82,7 @@
         imports = [ globalConfig ];
         config.globalConfig = {
           inherit stateVersion timeZone fullName user host;
-          inherit deviceClass desktopEnvironment gpu;
+          inherit deviceClass desktopEnvironment gpu system;
         };
       }
 

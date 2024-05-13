@@ -2,6 +2,7 @@
 
   imports = [
     ./fish.nix
+    ./ld.nix
   ];
 
   options = {};
