@@ -14,7 +14,7 @@
 
       shlvl = {
         disabled = false;
-        symbol = "↕️";
+        symbol = "󰹹";
         style = "bright-red bold";
       };
 
@@ -22,7 +22,7 @@
         disabled = false;
         format = "$indicator";
         fish_indicator = "";
-        bash_indicator = "[BASH](bright-white) ";
+        bash_indicator = "[󱆃](bright-white) ";
         zsh_indicator = "[ZSH](bright-white) ";
       };
 
@@ -37,21 +37,22 @@
       };
 
       nix_shell = {
-        symbol = "";
-        format = "[$symbol$name]($style) ";
+        symbol = "󱄅";
+        format = "[$symbol $name]($style) ";
         style = "bright-purple bold";
       };
 
       git_branch = {
         only_attached = true;
-        format = "[$symbol$branch]($style) ";
-        symbol = "שׂ";
+        format = "[$symbol $branch]($style) ";
+        symbol = "";
         style = "bright-yellow bold";
       };
 
       git_commit = {
         only_detached = true;
-        format = "[$hash]($style) ";
+        format = "[$symbol $hash]($style) ";
+        symbol = "";
         style = "bright-yellow bold";
       };
 
@@ -71,8 +72,8 @@
       jobs.style = "bright-green bold";
 
       character = {
-        success_symbol = "[\\$](bright-green bold)";
-        error_symbol = "[\\$](bright-red bold)";
+        success_symbol = "[](bright-green bold)";
+        error_symbol = "[](bright-red bold)";
       };
     };
   };

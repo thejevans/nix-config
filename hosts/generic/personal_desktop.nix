@@ -74,8 +74,11 @@
     stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
     stylix.image = ./nixos-wallpaper.png;
 
-    stylix.cursor.package = pkgs.bibata-cursors;
-    stylix.cursor.name = "Bibata-Modern-Ice";
+    stylix.cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Ice";
+      size = 20;
+    };
 
     stylix.polarity = "dark";
 
