@@ -20,6 +20,7 @@
       neovim.enable = true;
       starship.enable = true;
       fish.enable = true;
+      pipewireScarlett8i6.enable = true;
     };
 
     home.packages = with pkgs; [
@@ -32,6 +33,7 @@
       ripgrep
       fd
       sqlite
+      btop
 
       # gui
       darktable

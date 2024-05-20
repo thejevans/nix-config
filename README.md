@@ -45,6 +45,7 @@ hostnames are chosen using the random yokai generator [here](https://yokai.com?r
 - [fish.nix](./homeManagerModules/cli-applications/fish.nix)
 - [starship.nix](./homeManagerModules/cli-applications/starship.nix)
 - [neovim](./homeManagerModules/cli-applications/neovim)
+- [pipewire](./homeManagerModules/cli-applications/pipewire)
 
 ### GUI Applications
 

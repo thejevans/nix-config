@@ -31,7 +31,6 @@
       git
       gnumake
       bash
-      btop
       ntfs3g
 
       # gui
@@ -42,6 +41,7 @@
       ghostwriter
       newsflash
       chromium
+      libreoffice
 
       # currently broken upstream
       #openrgb-with-all-plugins
@@ -70,5 +70,42 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
     boot.kernelPackages = pkgs.linuxPackages_latest;
+
+    stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+    stylix.image = ./nixos-wallpaper.png;
+
+    stylix.cursor.package = pkgs.bibata-cursors;
+    stylix.cursor.name = "Bibata-Modern-Ice";
+
+    stylix.polarity = "dark";
+
+    stylix.opacity = {
+      applications = 1.0;
+      terminal = 1.0;
+      desktop = 1.0;
+      popups = 1.0;
+    };
+
+    stylix.fonts = {
+      monospace = {
+        package = pkgs.nerdfonts.override { fonts = [ "Hack" ]; };
+        name = "Hack Nerd Font Mono";
+      };
+      sansSerif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans";
+      };
+      serif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Serif";
+      };
+
+      sizes = {
+        applications = 12;
+        terminal = 15;
+        desktop = 10;
+        popups = 10;
+      };
+    };
   };
 }

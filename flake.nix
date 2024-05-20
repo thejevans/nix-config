@@ -7,6 +7,13 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nix-alien.url = "github:thiagokokada/nix-alien";
+    stylix.url = "github:danth/stylix";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -31,12 +38,12 @@
 
   globalConfig = { pkgs, lib, ... }: {
     options.globalConfig = {
-      system = lib.mkOption { type = lib.types.string; };
-      stateVersion = lib.mkOption { type = lib.types.string; };
-      timeZone = lib.mkOption { type = lib.types.string; };
-      fullName = lib.mkOption { type = lib.types.string; };
-      user = lib.mkOption { type = lib.types.string; };
-      host = lib.mkOption { type = lib.types.string; };
+      system = lib.mkOption { type = lib.types.str; };
+      stateVersion = lib.mkOption { type = lib.types.str; };
+      timeZone = lib.mkOption { type = lib.types.str; };
+      fullName = lib.mkOption { type = lib.types.str; };
+      user = lib.mkOption { type = lib.types.str; };
+      host = lib.mkOption { type = lib.types.str; };
 
       deviceClass = lib.mkOption {
         type = lib.types.enum [ "personal_laptop" "personal_desktop" ];
@@ -44,7 +51,7 @@
       };
 
       desktopEnvironment = lib.mkOption {
-        type = lib.types.enum [ "plasma6" "cosmic" ];
+        type = lib.types.enum [ "plasma6" "cosmic" "hyprland" ];
         default = "plasma6";
       };
 
@@ -75,6 +82,7 @@
       ./hosts/generic/global.nix
       ( ./hosts/generic + "/${deviceClass}.nix" )
       ./nixosModules
+      inputs.stylix.nixosModules.stylix
 
       { nixpkgs.overlays = [ nur.overlay ]; }
 
@@ -94,6 +102,7 @@
         home-manager.useUserPackages = true;
         home-manager.useGlobalPkgs = true;
         home-manager.users.${user} = import ( ./home + "/${deviceClass}.nix" );
+        home-manager.backupFileExtension = "backup";
       }
     ];
   };

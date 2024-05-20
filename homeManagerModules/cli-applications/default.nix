@@ -6,6 +6,7 @@
 
     ./cachix
     ./neovim
+    ./pipewire
   ];
 
   options = {};
