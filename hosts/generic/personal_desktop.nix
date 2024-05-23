@@ -32,6 +32,8 @@
       gnumake
       bash
       ntfs3g
+      xclip
+      wl-clipboard-rs
 
       # gui
       vesktop
@@ -95,12 +97,16 @@
         name = "Hack Nerd Font Mono";
       };
       sansSerif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Sans";
+        #package = pkgs.dejavu_fonts;
+        package = pkgs.nerdfonts.override { fonts = [ "Hack" ]; };
+        #name = "DejaVu Sans";
+        name = "Hack Nerd Font";
       };
       serif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Serif";
+        #package = pkgs.dejavu_fonts;
+        package = pkgs.nerdfonts.override { fonts = [ "Tinos" ]; };
+        #name = "DejaVu Serif";
+        name = "Tinos Nerd Font";
       };
 
       sizes = {

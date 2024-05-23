@@ -14,7 +14,7 @@
 
       shlvl = {
         disabled = false;
-        symbol = "󰹹";
+        symbol = "";
         style = "bright-red bold";
       };
 
@@ -51,8 +51,8 @@
 
       git_commit = {
         only_detached = true;
-        format = "[$symbol $hash]($style) ";
-        symbol = "";
+        format = "[$hash $tag]($style) ";
+        tag_symbol = "󰓼";
         style = "bright-yellow bold";
       };
 
@@ -60,7 +60,7 @@
       git_status.style = "bright-green bold";
 
       directory = {
-        read_only = " ";
+        read_only = " ";
         truncation_length = 0;
       };
 
@@ -70,9 +70,10 @@
       };
 
       jobs.style = "bright-green bold";
+      jobs.symbol = "󰫢";
 
       character = {
-        success_symbol = "[](bright-green bold)";
+        success_symbol = "[](bright-green bold)";
         error_symbol = "[](bright-red bold)";
       };
     };
