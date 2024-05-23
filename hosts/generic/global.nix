@@ -45,15 +45,16 @@
 
     users.groups.${config.globalConfig.user} = {};
 
-    nix.settings.trusted-users = [
-      "root"
-      "@wheel"
-    ];
-
     # Enable flakes.
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
     environment.sessionVariables.FLAKE = "/home/${config.globalConfig.user}/git_repos/nix-config";
+
+    nix.settings.trusted-substituters = [
+      "https://cache.nixos.org/"
+      "https://cosmic.cachix.org/"
+      "https://devenv.cachix.org/"
+    ];
 
     environment.systemPackages = with pkgs; [
       vim

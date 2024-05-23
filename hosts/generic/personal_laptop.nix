@@ -12,7 +12,6 @@
     nixosModules = {
       firefox.enable = true;
       fish.enable = true;
-      gaming.enable = true;
     };
 
     # Allow unfree packages
@@ -36,6 +35,7 @@
       # gui
       sleek
       obsidian
+      vlc
     ];
 
     # Enable networking
