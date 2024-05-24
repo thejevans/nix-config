@@ -142,7 +142,7 @@
         fullName = "John Evans";
         timeZone = "America/Denver";
         desktopEnvironment = "plasma6";
-        deviceClass = "personal_desktop";
+        deviceClass = "personal_gaming_desktop";
         stateVersion = "23.11";
         gpu = "amdgpu";
       };

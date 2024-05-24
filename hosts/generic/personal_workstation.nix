@@ -12,8 +12,6 @@
     nixosModules = {
       firefox.enable = true;
       fish.enable = true;
-      gaming.enable = true;
-      ld.enable = true;
     };
 
     # Allow unfree packages
@@ -31,6 +29,7 @@
       git
       gnumake
       bash
+      btop
       ntfs3g
       xclip
       wl-clipboard-rs
@@ -44,9 +43,6 @@
       newsflash
       chromium
       libreoffice
-
-      # currently broken upstream
-      #openrgb-with-all-plugins
     ];
 
     # Enable networking
@@ -97,15 +93,11 @@
         name = "Hack Nerd Font Mono";
       };
       sansSerif = {
-        #package = pkgs.dejavu_fonts;
         package = pkgs.nerdfonts.override { fonts = [ "Hack" ]; };
-        #name = "DejaVu Sans";
         name = "Hack Nerd Font";
       };
       serif = {
-        #package = pkgs.dejavu_fonts;
         package = pkgs.nerdfonts.override { fonts = [ "Tinos" ]; };
-        #name = "DejaVu Serif";
         name = "Tinos Nerd Font";
       };
 

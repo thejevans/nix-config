@@ -20,7 +20,6 @@
       neovim.enable = true;
       starship.enable = true;
       fish.enable = true;
-      pipewireScarlett8i6.enable = true;
     };
 
     home.packages = with pkgs; [
@@ -37,7 +36,6 @@
 
       # gui
       darktable
-      webcord
       hydroxide
       obsidian
       nextcloud-client

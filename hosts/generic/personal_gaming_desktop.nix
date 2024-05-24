@@ -8,6 +8,11 @@
 
   options = {};
 
-  config = {};
+  config = {
+    nixosModules = {
+      gaming.enable = true;
+      ld.enable = true;
+    };
+  };
 
 }

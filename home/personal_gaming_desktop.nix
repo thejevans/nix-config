@@ -6,6 +6,10 @@
 
   options = {};
 
-  config = {};
+  config = {
+    homeManagerModules = {
+      pipewireScarlett8i6.enable = true;
+    };
+  };
 
 }
