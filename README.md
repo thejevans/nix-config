@@ -15,8 +15,9 @@ hostnames are chosen using the random yokai generator [here](https://yokai.com?r
 ### Generic Hosts
 
 - [global.nix](./hosts/generic/global.nix)
+- [personal_workstation.nix](./hosts/generic/personal_workstation.nix)
 - [personal_laptop.nix](./hosts/generic/personal_laptop.nix)
-- [personal_desktop.nix](./hosts/generic/personal_desktop.nix)
+- [personal_gaming_desktop.nix](./hosts/generic/personal_gaming_desktop.nix)
 
 ### CLI Applications
 
@@ -37,8 +38,9 @@ hostnames are chosen using the random yokai generator [here](https://yokai.com?r
 
 ### Generic Hosts
 
+- [personal_workstation.nix](./home/personal_workstation.nix)
 - [personal_laptop.nix](./home/personal_laptop.nix)
-- [personal_desktop.nix](./home/personal_desktop.nix)
+- [personal_gaming_desktop.nix](./home/personal_gaming_desktop.nix)
 
 ### CLI Applications
 
