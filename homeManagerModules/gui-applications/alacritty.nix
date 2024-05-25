@@ -17,7 +17,10 @@
       enable = true;
       settings.shell.program = lib.mkIf config.homeManagerModules.fish.enable "fish";
       settings.window.decorations = "none";
-      #settings.font.size = 20;
+      settings.window.padding = {
+        x = 5;
+        y = 2;
+      };
     };
   };
 
