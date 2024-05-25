@@ -7,6 +7,12 @@
   };
 
   config = lib.mkIf config.homeManagerModules.firefox.enable {
+    home.sessionVariables = {
+      MOZ_USE_XINPUT2 = 1;
+      GTK_USE_PORTAL = 1;
+      MOZ_ENABLE_WAYLAND = 1;
+    };
+
     programs.firefox.enable = true;
 
     programs.firefox.package = pkgs.wrapFirefox pkgs.firefox-unwrapped {

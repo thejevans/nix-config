@@ -29,6 +29,7 @@
       zig
       nodejs
       xclip
+      wl-clipboard-rs
       ripgrep
       fd
       sqlite
@@ -39,6 +40,13 @@
       hydroxide
       obsidian
       nextcloud-client
+      vesktop
+      jellyfin-media-player
+      vlc
+      ghostwriter
+      newsflash
+      chromium
+      libreoffice
 
       # devenv
       cachix

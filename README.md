@@ -26,7 +26,6 @@ hostnames are chosen using the random yokai generator [here](https://yokai.com?r
 
 ### GUI Applications
 
-- [firefox.nix](./nixosModules/gui-applications/firefox.nix)
 - [gaming.nix](./nixosModules/gui-applications/gaming.nix)
 
 ### Desktop Environments

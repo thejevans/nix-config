@@ -10,7 +10,6 @@
     services.avahi.enable = true;
 
     nixosModules = {
-      firefox.enable = true;
       fish.enable = true;
     };
 
@@ -21,7 +20,6 @@
     };
 
     environment.systemPackages = with pkgs; [
-      # cli
       usbutils
       pciutils
       lshw
@@ -29,20 +27,7 @@
       git
       gnumake
       bash
-      btop
       ntfs3g
-      xclip
-      wl-clipboard-rs
-
-      # gui
-      vesktop
-      jellyfin-media-player
-      obsidian
-      vlc
-      ghostwriter
-      newsflash
-      chromium
-      libreoffice
     ];
 
     # Enable networking
