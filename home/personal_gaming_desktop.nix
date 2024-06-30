@@ -10,6 +10,10 @@
     homeManagerModules = {
       pipewireScarlett8i6.enable = true;
     };
+
+    home.packages = with pkgs; [
+      openrgb
+    ];
   };
 
 }

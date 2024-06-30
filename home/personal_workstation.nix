@@ -47,6 +47,9 @@
       newsflash
       chromium
       libreoffice
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
+      pinta
 
       # devenv
       cachix
