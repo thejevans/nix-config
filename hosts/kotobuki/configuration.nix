@@ -8,6 +8,11 @@
   options = {};
 
   config = {
+    singleDiskZfsImpermanenceDisko = {
+      enable = true;
+      device = "/dev/nvme0n1";
+    };
+
     # Add support for backlight
     boot.kernelParams = [ "acpi_backlight=video" ];
   };

@@ -13,10 +13,6 @@
       device = "/dev/nvme0n1";
     };
 
-    users.users.root.openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOvjYolYlgPQ5XA59Ddf6dmtVMWJN1fDvTKVVP4z+Re+ thejevans@pm.me"
-    ];
-
     services.tlp = {
       enable = true;
       settings = {
