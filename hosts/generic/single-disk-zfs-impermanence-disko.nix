@@ -1,4 +1,4 @@
-{ ... }:
+{ config, lib, ... }:
 
 let
 
@@ -28,8 +28,8 @@ zfs_partition = {
 # disks
 # -----------------------------------------------------------------------------
 
-main_disk = {
-  device = "/dev/nvme0n1";
+main_disk = { device }: {
+  inherit device;
   type = "disk";
   content = {
     type = "gpt";
@@ -116,11 +116,14 @@ in
 {
   imports = [];
 
-  options = {};
+  options.singleDiskZfsImpermanenceDisko = {
+    enable = lib.mkEnableOption "enables single disk ZFS impermanence disko";
+    device = lib.mkOption { type = lib.types.str; };
+  };
 
-  config = {
+  config = lib.mkIf config.singleDiskZfsImpermanenceDisko.enable {
     disko.devices = {
-      disk.main = main_disk;
+      disk.main = main_disk { device = config.singleDiskZfsImpermanenceDisko.device; };
       zpool.rpool = rpool_zfs_pool;
     };
   };

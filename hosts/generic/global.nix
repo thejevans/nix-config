@@ -1,6 +1,8 @@
 { pkgs, config, ... }: {
 
-  imports = [];
+  imports = [
+    ./single-disk-zfs-impermanence-disko.nix
+  ];
 
   options = {};
 
