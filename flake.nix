@@ -66,7 +66,7 @@
     };
   };
 
-  nixosConfiguration = {
+  nixosWorkstationConfiguration = {
     system,
     stateVersion,
     desktopEnvironment,
@@ -113,11 +113,49 @@
     ];
   };
 
+  nixosServerConfiguration = {
+    system,
+    stateVersion,
+    timeZone,
+    fullName,
+    user,
+    host,
+    deviceClass,
+    gpu,
+  }: nixpkgs.lib.nixosSystem {
+    inherit system;
+
+    specialArgs = { inherit inputs; };
+
+    modules = [
+      ./hosts/${host}/configuration.nix
+      ./hosts/generic/global.nix
+      ( ./hosts/generic + "/${deviceClass}.nix" )
+      ./nixosModules
+      inputs.impermanence.nixosModules.impermanence
+      inputs.disko.nixosModules.disko
+
+      { nixpkgs.overlays = [ nur.overlay ]; }
+
+      {
+        imports = [ globalConfig ];
+        config.globalConfig = {
+          inherit stateVersion timeZone fullName user host;
+          inherit deviceClass gpu system;
+        };
+      }
+    ];
+  };
+
   in {
 
     nixosConfigurations = {
 
-      mujina = nixosConfiguration {
+# -----------------------------------------------------------------------------
+# laptops
+# -----------------------------------------------------------------------------
+
+      mujina = nixosWorkstationConfiguration {
         system = "x86_64-linux";
         host = "mujina";
         user = "thejevans";
@@ -129,7 +167,7 @@
         gpu = "integrated";
       };
 
-      kotobuki = nixosConfiguration {
+      kotobuki = nixosWorkstationConfiguration {
         system = "x86_64-linux";
         host = "kotobuki";
         user = "thejevans";
@@ -141,7 +179,11 @@
         gpu = "integrated";
       };
 
-      kubikajiri = nixosConfiguration {
+# -----------------------------------------------------------------------------
+# desktops
+# -----------------------------------------------------------------------------
+
+      kubikajiri = nixosWorkstationConfiguration {
         system = "x86_64-linux";
         host = "kubikajiri";
         user = "thejevans";
@@ -151,6 +193,21 @@
         deviceClass = "personal_gaming_desktop";
         stateVersion = "23.11";
         gpu = "amdgpu";
+      };
+
+# -----------------------------------------------------------------------------
+# virtual machines
+# -----------------------------------------------------------------------------
+
+      kijimunaa = nixosServerConfiguration {
+          system = "x86_64-linux";
+          host = "kijimunaa";
+          user = "thejevans";
+          fullName = "John Evans";
+          timeZone = "America/Denver";
+          deviceClass = "proxmox_vm";
+          stateVersion = "24.05";
+          gpu = "integrated";
       };
 
     };
