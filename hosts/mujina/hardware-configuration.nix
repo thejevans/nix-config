@@ -16,16 +16,6 @@
   boot.extraModulePackages = [ ];
   boot.kernelParams = [ "module_blacklist=hid_sensor_hub" ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/330ef1de-f15f-4dc7-b013-51281fe00dc4";
-      fsType = "ext4";
-    };
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/6287-2A59";
-      fsType = "vfat";
-    };
-
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

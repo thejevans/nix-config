@@ -5,10 +5,12 @@
   inputs = {
     nur.url = "github:nix-community/NUR";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nix-alien.url = "github:thiagokokada/nix-alien";
     stylix.url = "github:danth/stylix";
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    impermanence.url = "github:nix-community/impermanence";
+    disko.url = "github:nix-community/disko";
 
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -16,7 +18,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -33,6 +35,8 @@
     nixos-hardware,
     home-manager,
     nur,
+    impermanence,
+    disko,
     ...
   }@inputs: let
 
@@ -83,6 +87,8 @@
       ( ./hosts/generic + "/${deviceClass}.nix" )
       ./nixosModules
       inputs.stylix.nixosModules.stylix
+      inputs.impermanence.nixosModules.impermanence
+      inputs.disko.nixosModules.disko
 
       { nixpkgs.overlays = [ nur.overlay ]; }
 
@@ -117,7 +123,7 @@
         user = "thejevans";
         fullName = "John Evans";
         timeZone = "America/Denver";
-        desktopEnvironment = "cosmic";
+        desktopEnvironment = "plasma6";
         deviceClass = "personal_laptop";
         stateVersion = "23.05";
         gpu = "integrated";

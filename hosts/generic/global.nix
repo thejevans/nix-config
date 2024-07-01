@@ -9,6 +9,8 @@
 
     networking.hostName = "${config.globalConfig.host}";
 
+    security.sudo.wheelNeedsPassword = false;
+
     # Select internationalisation properties.
     i18n.defaultLocale = "en_US.UTF-8";
 
@@ -31,6 +33,7 @@
       home = "/home/${config.globalConfig.user}";
       group = "${config.globalConfig.user}";
       extraGroups = [ "networkmanager" "wheel" "uinput" ];
+      initialPassword = "pass123";
     };
 
     nixosModules.${config.globalConfig.desktopEnvironment}.enable = true;

@@ -52,8 +52,9 @@
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
+    stylix.enable = true;
     stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
     stylix.image = ./nixos-wallpaper.png;
 

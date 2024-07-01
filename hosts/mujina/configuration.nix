@@ -1,13 +1,73 @@
-{ pkgs, lib, inputs, ... }: {
+{ pkgs, lib, inputs, config, ... }: {
 
   imports = [
     ./hardware-configuration.nix
+    ./disko.nix
     inputs.nixos-hardware.nixosModules.framework-12th-gen-intel
   ];
 
   options = {};
 
   config = {
+    boot.initrd.systemd.enable = true;
+    boot.swraid.enable = false;
+
+    boot.initrd.systemd.services.rollback = {
+      description = "";
+      wantedBy = [
+        "initrd.target"
+      ];
+      after = [
+        "zfs-import-rpool.service"
+      ];
+      before = [
+        "sysroot.mount"
+      ];
+      path = with pkgs; [
+        zfs
+      ];
+      unitConfig.DefaultDependencies = "no";
+      serviceConfig.Type = "oneshot";
+      script = ''
+        zfs rollback -r rpool/local/root@blank && echo "  >> >> rollback complete << <<"
+      '';
+    };
+
+    fileSystems = {
+      "/cache".neededForBoot = true;
+      "/persistent".neededForBoot = true;
+    };
+
+    networking.hostId = builtins.substring 0 8 (
+      builtins.hashString "sha256" config.networking.hostName
+    );
+
+    environment.persistence."/persistent" = {
+      hideMounts = true;
+      directories = [
+        "/etc/NetworkManager/system-connections"
+        "/etc/ssh/authorized_keys.d"
+        "/var/lib/bluetooth"
+        "/var/lib/nixos"
+        "/var/lib/systemd/coredump"
+        "/var/lib/upower"
+        "/var/log"
+      ];
+      files = [
+        "/etc/adjtime"
+        "/etc/machine-id"
+        "/etc/zfs/zpool.cache"
+      ];
+    };
+
+    security.sudo.extraConfig = ''
+      Defaults lecture = never
+    '';
+
+    users.users.root.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOvjYolYlgPQ5XA59Ddf6dmtVMWJN1fDvTKVVP4z+Re+ thejevans@pm.me"
+    ];
+
     services.tlp = {
       enable = true;
       settings = {
