@@ -33,7 +33,7 @@
       home = "/home/${config.globalConfig.user}";
       group = "${config.globalConfig.user}";
       extraGroups = [ "networkmanager" "wheel" "uinput" ];
-      initialPassword = "pass123";
+      initialHashedPassword = "$6$ufjdtxndzMLi8EdS$EiHeZ.0qA6.Ik4vlcSY74QDekPLDMfrepgsnh7fZhW70uwJChg4aewQncrbXuxkWN.YeYSJdiyyLi8dq.nVAv/";
     };
 
     nixosModules.${config.globalConfig.desktopEnvironment}.enable = true;

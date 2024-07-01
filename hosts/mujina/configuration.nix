@@ -12,6 +12,9 @@
     boot.initrd.systemd.enable = true;
     boot.swraid.enable = false;
 
+    services.zfs.trim.enable = true;
+    services.zfs.autoScrub.enable = true;
+
     boot.initrd.systemd.services.rollback = {
       description = "";
       wantedBy = [
