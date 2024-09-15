@@ -173,6 +173,8 @@ in
         "/var/lib/systemd/coredump"
         "/var/lib/upower"
         "/var/log"
+        "/var/lib/fprint"
+        "/var/lib/flatpak/"
       ];
       files = [
         "/etc/adjtime"

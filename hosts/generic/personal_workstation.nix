@@ -8,6 +8,7 @@
 
   config = {
     services.avahi.enable = true;
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     nixosModules = {
       fish.enable = true;
@@ -35,6 +36,9 @@
 
     # Enable CUPS to print documents.
     services.printing.enable = true;
+
+    # Enable Flatpak
+    services.flatpak.enable = true;
 
     # Enable sound with pipewire.
     sound.enable = true;

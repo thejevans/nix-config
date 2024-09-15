@@ -7,6 +7,7 @@ require('lualine').setup {
     disabled_filetypes = {
       statusline = {},
       winbar = {},
+
     },
     ignore_focus = {},
     always_divide_middle = true,
