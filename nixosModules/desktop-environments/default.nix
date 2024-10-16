@@ -3,7 +3,7 @@
   imports = [
     ./cosmic.nix
     ./plasma6.nix
-    ./hyprland.nix
+    ./sway.nix
   ];
 
   options = {};

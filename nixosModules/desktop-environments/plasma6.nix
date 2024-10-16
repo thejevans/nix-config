@@ -43,7 +43,7 @@
 
     # Automatically authenticate KDEWallet
     # DOESN'T WORK
-    # security.pam.services.login.enableKwallet = true;
+    security.pam.services.kde.kwallet.enable = true;
 
     # Open ports for KDEConnect
     networking.firewall.allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];

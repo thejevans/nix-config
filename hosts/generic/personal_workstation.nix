@@ -7,7 +7,6 @@
   options = {};
 
   config = {
-    services.avahi.enable = true;
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     nixosModules = {
@@ -31,11 +30,25 @@
       ntfs3g
     ];
 
+    services.udev.packages = [ 
+      pkgs.platformio-core.udev
+      pkgs.openocd
+    ];
+
     # Enable networking
     networking.networkmanager.enable = true;
 
     # Enable CUPS to print documents.
-    services.printing.enable = true;
+    services.printing = {
+      enable = true;
+      drivers = [ pkgs.gutenprint pkgs.brlaser ];
+    };
+
+    services.avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
 
     # Enable Flatpak
     services.flatpak.enable = true;

@@ -7,15 +7,9 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nix-alien.url = "github:thiagokokada/nix-alien";
-    stylix.url = "github:danth/stylix";
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    stylix.url = "github:danth/stylix/cf8b6e2d4e8aca8ef14b839a906ab5eb98b08561";
     impermanence.url = "github:nix-community/impermanence";
     disko.url = "github:nix-community/disko";
-
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
@@ -55,7 +49,7 @@
       };
 
       desktopEnvironment = lib.mkOption {
-        type = lib.types.enum [ "plasma6" "cosmic" "hyprland" ];
+        type = lib.types.enum [ "plasma6" "cosmic" "sway" ];
         default = "plasma6";
       };
 
@@ -123,7 +117,7 @@
         user = "thejevans";
         fullName = "John Evans";
         timeZone = "America/Denver";
-        desktopEnvironment = "plasma6";
+        desktopEnvironment = "sway";
         deviceClass = "personal_laptop";
         stateVersion = "23.05";
         gpu = "integrated";
