@@ -46,7 +46,9 @@
       ghostwriter
       newsflash
       chromium
-      libreoffice
+      libreoffice-qt-fresh
+      hunspell
+      hunspellDicts.en-us-large
       xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
       pinta
