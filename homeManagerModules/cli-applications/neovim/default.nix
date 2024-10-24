@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  user,
   host,
   ...
 }: let
@@ -45,10 +44,10 @@ in {
                  },
                  options = {
                     nixos = {
-                       expr = '(builtins.getFlake \"github:thejevans/nixos-config\").nixosConfigurations.${host}.options',
+                       expr = '(builtins.getFlake \"github:thejevans/nix-config\").nixosConfigurations.${host}.options',
                     },
                     home_manager = {
-                       expr = '(builtins.getFlake \"github:thejevans/nixos-config\").homeConfigurations."${user}@${host}".options',
+                       expr = '(builtins.getFlake \"github:thejevans/nix-config\").nixosConfigurations.${host}.home-manager.options',
                     },
                  },
               },

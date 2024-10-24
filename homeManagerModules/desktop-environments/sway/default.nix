@@ -14,7 +14,7 @@
   };
 
   config = lib.mkIf config.homeManagerModules.sway.enable {
-    home.packages = with pkgs; [bemenu swayosd khal];
+    home.packages = with pkgs; [wofi swayosd khal];
 
     # Enable KDE Connect
     services.kdeconnect.enable = true;
@@ -30,10 +30,10 @@
 
     wayland.windowManager.sway = {
       enable = true;
-      config = rec {
+      config = {
         modifier = "Mod4";
         terminal = "alacritty";
-        menu = "bemenu-run";
+        menu = "wofi --show drun";
         gaps.inner = 10;
         bars = [];
         window = {
