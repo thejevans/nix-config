@@ -1,7 +1,9 @@
-{ pkgs, lib, config, ... }:
-
 {
-
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   imports = [];
 
   options = {
@@ -15,14 +17,13 @@
       driSupport32Bit = true;
     };
 
-    services.xserver.videoDrivers = lib.mkIf (config.globalConfig.gpu != "integrated") [ config.globalConfig.gpu ];
+    services.xserver.videoDrivers = lib.mkIf (config.globalConfig.gpu != "integrated") [config.globalConfig.gpu];
     hardware.nvidia.modesetting.enable = lib.mkIf (config.globalConfig.gpu == "nvidia") true;
 
     programs.steam = {
       enable = true;
       gamescopeSession.enable = true;
     };
-
 
     environment.systemPackages = with pkgs; [
       mangohud
@@ -50,9 +51,12 @@
     # sunshine networking settings
     networking.firewall = {
       enable = true;
-      allowedTCPPorts = [ 47984 47989 47990 48010 ];
+      allowedTCPPorts = [47984 47989 47990 48010];
       allowedUDPPortRanges = [
-        { from = 47998; to = 48000; }
+        {
+          from = 47998;
+          to = 48000;
+        }
         #{ from = 8000; to = 8010; }
       ];
     };
@@ -90,5 +94,4 @@
       };
     };
   };
-
 }

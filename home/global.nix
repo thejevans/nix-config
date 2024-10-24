@@ -1,5 +1,11 @@
-{ inputs, pkgs, user, desktopEnvironment, stateVersion, ... }: {
-
+{
+  inputs,
+  pkgs,
+  user,
+  desktopEnvironment,
+  stateVersion,
+  ...
+}: {
   imports = [];
 
   options = {};
@@ -22,5 +28,4 @@
     # changes in each release.
     home.stateVersion = "${stateVersion}";
   };
-
 }

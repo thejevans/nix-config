@@ -1,5 +1,9 @@
-{ pkgs, lib, config, ... }: {
-
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   imports = [];
 
   options = {
@@ -13,8 +17,8 @@
     ];
 
     systemd.services.flatpak-repo = {
-      wantedBy = [ "multi-user.target" ];
-      path = [ pkgs.flatpak ];
+      wantedBy = ["multi-user.target"];
+      path = [pkgs.flatpak];
       script = ''
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
       '';
@@ -46,9 +50,19 @@
     security.pam.services.kde.kwallet.enable = true;
 
     # Open ports for KDEConnect
-    networking.firewall.allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
-    networking.firewall.allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
-    networking.firewall.allowedTCPPorts = [ 8010 ];
+    networking.firewall.allowedTCPPortRanges = [
+      {
+        from = 1714;
+        to = 1764;
+      }
+    ];
+    networking.firewall.allowedUDPPortRanges = [
+      {
+        from = 1714;
+        to = 1764;
+      }
+    ];
+    networking.firewall.allowedTCPPorts = [8010];
 
     # Configure keymap in X11
     services.xserver.xkb = {
@@ -59,5 +73,4 @@
     # Enable touchpad support (enabled default in most desktopManager).
     # services.xserver.libinput.enable = true;
   };
-
 }

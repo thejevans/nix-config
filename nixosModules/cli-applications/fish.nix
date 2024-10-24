@@ -1,5 +1,9 @@
-{ pkgs, lib, config, ... }: {
-
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   imports = [];
 
   options = {
@@ -10,5 +14,4 @@
     users.users.${config.globalConfig.user}.shell = pkgs.fish;
     programs.fish.enable = true;
   };
-
 }

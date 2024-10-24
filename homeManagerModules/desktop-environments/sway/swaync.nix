@@ -1,5 +1,9 @@
-{config, lib, pkgs, ...}: {
-
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [];
 
   options = {};
@@ -70,7 +74,5 @@
       # Custom style
       style = builtins.readFile (./. + "/swaync.css");
     };
-
   };
-
 }

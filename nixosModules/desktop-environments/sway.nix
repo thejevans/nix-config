@@ -1,5 +1,10 @@
-{ pkgs, lib, config, inputs, ... }: {
-
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}: {
   imports = [];
 
   options = {
@@ -13,11 +18,12 @@
       wl-clipboard # copy and paste
       mako # notifications
       pkgs.pulseaudio #needed for pactl
+      polkit_gnome # for elevating GUI apps
     ];
 
     systemd.services.flatpak-repo = {
-      wantedBy = [ "multi-user.target" ];
-      path = [ pkgs.flatpak ];
+      wantedBy = ["multi-user.target"];
+      path = [pkgs.flatpak];
       script = ''
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
       '';
@@ -67,6 +73,6 @@
 
     security.polkit.enable = true;
 
-    users.users.${config.globalConfig.user}.extraGroups = [ "video" ];
+    users.users.${config.globalConfig.user}.extraGroups = ["video"];
   };
 }

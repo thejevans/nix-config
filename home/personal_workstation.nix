@@ -1,5 +1,8 @@
-{ inputs, pkgs, ... }: {
-
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     ./global.nix
     inputs.self.outputs.homeManagerModules.default
@@ -57,5 +60,4 @@
       cachix
     ];
   };
-
 }

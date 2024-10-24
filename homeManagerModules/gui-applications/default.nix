@@ -1,5 +1,10 @@
-{ pkgs, lib, config, home-manager, ... }: {
-
+{
+  pkgs,
+  lib,
+  config,
+  home-manager,
+  ...
+}: {
   imports = [
     ./alacritty.nix
 
@@ -9,5 +14,4 @@
   options = {};
 
   config = {};
-
 }

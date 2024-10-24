@@ -1,10 +1,15 @@
-{ pkgs, lib, ... }: {
-
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./gaming.nix
   ];
 
   options = {};
 
-  config = {};
+  config = {
+    environment.systemPackages = with pkgs; [rpi-imager];
+  };
 }

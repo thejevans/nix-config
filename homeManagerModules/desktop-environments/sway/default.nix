@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }: {
-
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./waybar.nix
     ./swaync.nix
@@ -10,7 +14,7 @@
   };
 
   config = lib.mkIf config.homeManagerModules.sway.enable {
-    home.packages = with pkgs; [ bemenu swayosd khal ];
+    home.packages = with pkgs; [bemenu swayosd khal];
 
     # Enable KDE Connect
     services.kdeconnect.enable = true;
@@ -64,7 +68,5 @@
       #  "${mod}+Tab" = "workspace back_and_forth";
       #'';
     };
-
   };
-
 }

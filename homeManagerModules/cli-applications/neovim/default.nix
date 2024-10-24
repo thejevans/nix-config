@@ -1,13 +1,17 @@
-{ config, pkgs, lib, ... }: let
-
-lua_plugin = plugin : name : {
-  inherit plugin;
-  type = "lua";
-  config = builtins.readFile( ./. + "/plugin-${name}.lua" );
-};
-
+{
+  config,
+  pkgs,
+  lib,
+  user,
+  host,
+  ...
+}: let
+  lua_plugin = plugin: name: {
+    inherit plugin;
+    type = "lua";
+    config = builtins.readFile (./. + "/plugin-${name}.lua");
+  };
 in {
-
   imports = [];
 
   options = {
@@ -17,6 +21,8 @@ in {
   config = lib.mkIf config.homeManagerModules.neovim.enable {
     home.packages = with pkgs; [
       tree-sitter
+      nixd
+      alejandra
       pyright
     ];
 
@@ -25,15 +31,37 @@ in {
       defaultEditor = true;
 
       extraLuaConfig = ''
+        local nvim_lsp = require("lspconfig")
         vim.opt.termguicolors = true
+        nvim_lsp.nixd.setup({
+           cmd = { "nixd" },
+           settings = {
+              nixd = {
+                 nixpkgs = {
+                    expr = "import <nixpkgs> { }",
+                 },
+                 formatting = {
+                    command = { "alejandra" },
+                 },
+                 options = {
+                    nixos = {
+                       expr = '(builtins.getFlake ("git+file://" + toString ./.)).nixosConfigurations.${host}.options',
+                    },
+                    home_manager = {
+                       expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations."${user}@${host}".options',
+                    },
+                 },
+              },
+           },
+        })
       '';
 
       plugins = with pkgs; [
         #( lua_plugin luaPackages.lazy-nvim "lazy-nvim" )
 
         # color scheme
-        ( lua_plugin vimPlugins.lualine-nvim "lualine-nvim" )
-        ( lua_plugin vimPlugins.material-nvim "material-nvim" )
+        (lua_plugin vimPlugins.lualine-nvim "lualine-nvim")
+        (lua_plugin vimPlugins.material-nvim "material-nvim")
 
         # cmp dependencies
         vimPlugins.cmp-nvim-lsp
@@ -46,17 +74,17 @@ in {
         # luasnip dependencies
         luaPackages.jsregexp
 
-        ( lua_plugin vimPlugins.nvim-cmp "nvim-cmp" )
+        (lua_plugin vimPlugins.nvim-cmp "nvim-cmp")
 
-        ( lua_plugin vimPlugins.nvim-lspconfig "nvim-lspconfig" )
-        ( lua_plugin vimPlugins.nvim-treesitter.withAllGrammars "nvim-treesitter" )
-        ( lua_plugin vimPlugins.rust-tools-nvim "rust-tools-nvim" )
+        (lua_plugin vimPlugins.nvim-lspconfig "nvim-lspconfig")
+        (lua_plugin vimPlugins.nvim-treesitter.withAllGrammars "nvim-treesitter")
+        (lua_plugin vimPlugins.rust-tools-nvim "rust-tools-nvim")
 
         # telescope dependencies
         luaPackages.plenary-nvim
         vimPlugins.nvim-web-devicons
 
-        ( lua_plugin vimPlugins.telescope-nvim "telescope-nvim" )
+        (lua_plugin vimPlugins.telescope-nvim "telescope-nvim")
 
         vimPlugins.neovim-sensible
         vimPlugins.nvim-dap
@@ -67,5 +95,4 @@ in {
       ];
     };
   };
-
 }

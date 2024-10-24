@@ -1,7 +1,8 @@
-{ config, pkgs, lib, inputs, ... }:
-
 {
-
+  config,
+  pkgs,
+  ...
+}: {
   imports = [];
 
   options = {};
@@ -16,7 +17,7 @@
     # Allow unfree packages
     nixpkgs.config = {
       allowUnfree = true;
-      permittedInsecurePackages = [ "electron-24.8.6" ];
+      permittedInsecurePackages = ["electron-24.8.6"];
     };
 
     environment.systemPackages = with pkgs; [
@@ -30,7 +31,7 @@
       ntfs3g
     ];
 
-    services.udev.packages = [ 
+    services.udev.packages = [
       pkgs.platformio-core.udev
       pkgs.openocd
     ];
@@ -41,7 +42,7 @@
     # Enable CUPS to print documents.
     services.printing = {
       enable = true;
-      drivers = [ pkgs.gutenprint pkgs.brlaser ];
+      drivers = [pkgs.gutenprint pkgs.brlaser];
     };
 
     services.avahi = {
@@ -92,15 +93,15 @@
 
     stylix.fonts = {
       monospace = {
-        package = pkgs.nerdfonts.override { fonts = [ "Hack" ]; };
+        package = pkgs.nerdfonts.override {fonts = ["Hack"];};
         name = "Hack Nerd Font Mono";
       };
       sansSerif = {
-        package = pkgs.nerdfonts.override { fonts = [ "Hack" ]; };
+        package = pkgs.nerdfonts.override {fonts = ["Hack"];};
         name = "Hack Nerd Font";
       };
       serif = {
-        package = pkgs.nerdfonts.override { fonts = [ "Tinos" ]; };
+        package = pkgs.nerdfonts.override {fonts = ["Tinos"];};
         name = "Tinos Nerd Font";
       };
 

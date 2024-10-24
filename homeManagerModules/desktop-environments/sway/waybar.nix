@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }: {
-
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [];
 
   options = {};
@@ -179,9 +183,8 @@
       ];
 
       style = lib.mkAfter ''
-        ${builtins.readFile  (./. + "/style.css")}
+        ${builtins.readFile (./. + "/style.css")}
       '';
     };
   };
-
 }

@@ -1,5 +1,10 @@
-{ inputs, config, pkgs, lib, ... }: {
-
+{
+  inputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.apple-macbook-air-4
@@ -14,7 +19,6 @@
     };
 
     # Add support for backlight
-    boot.kernelParams = [ "acpi_backlight=video" ];
+    boot.kernelParams = ["acpi_backlight=video"];
   };
-
 }
