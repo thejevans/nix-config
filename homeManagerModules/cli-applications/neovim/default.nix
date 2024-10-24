@@ -45,10 +45,10 @@ in {
                  },
                  options = {
                     nixos = {
-                       expr = '(builtins.getFlake ("git+file://" + toString ./.)).nixosConfigurations.${host}.options',
+                       expr = '(builtins.getFlake \"github:thejevans/nixos-config\").nixosConfigurations.${host}.options',
                     },
                     home_manager = {
-                       expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations."${user}@${host}".options',
+                       expr = '(builtins.getFlake \"github:thejevans/nixos-config\").homeConfigurations."${user}@${host}".options',
                     },
                  },
               },
@@ -56,42 +56,42 @@ in {
         })
       '';
 
-      plugins = with pkgs; [
+      plugins = [
         #( lua_plugin luaPackages.lazy-nvim "lazy-nvim" )
 
         # color scheme
-        (lua_plugin vimPlugins.lualine-nvim "lualine-nvim")
-        (lua_plugin vimPlugins.material-nvim "material-nvim")
+        (lua_plugin pkgs.vimPlugins.lualine-nvim "lualine-nvim")
+        (lua_plugin pkgs.vimPlugins.material-nvim "material-nvim")
 
         # cmp dependencies
-        vimPlugins.cmp-nvim-lsp
-        vimPlugins.cmp-buffer
-        vimPlugins.cmp-path
-        vimPlugins.cmp-cmdline
-        luaPackages.luasnip
-        vimPlugins.cmp_luasnip
+        pkgs.vimPlugins.cmp-nvim-lsp
+        pkgs.vimPlugins.cmp-buffer
+        pkgs.vimPlugins.cmp-path
+        pkgs.vimPlugins.cmp-cmdline
+        pkgs.luaPackages.luasnip
+        pkgs.vimPlugins.cmp_luasnip
 
         # luasnip dependencies
-        luaPackages.jsregexp
+        pkgs.luaPackages.jsregexp
 
-        (lua_plugin vimPlugins.nvim-cmp "nvim-cmp")
+        (lua_plugin pkgs.vimPlugins.nvim-cmp "nvim-cmp")
 
-        (lua_plugin vimPlugins.nvim-lspconfig "nvim-lspconfig")
-        (lua_plugin vimPlugins.nvim-treesitter.withAllGrammars "nvim-treesitter")
-        (lua_plugin vimPlugins.rust-tools-nvim "rust-tools-nvim")
+        (lua_plugin pkgs.vimPlugins.nvim-lspconfig "nvim-lspconfig")
+        (lua_plugin pkgs.vimPlugins.nvim-treesitter.withAllGrammars "nvim-treesitter")
+        (lua_plugin pkgs.vimPlugins.rust-tools-nvim "rust-tools-nvim")
 
         # telescope dependencies
-        luaPackages.plenary-nvim
-        vimPlugins.nvim-web-devicons
+        pkgs.luaPackages.plenary-nvim
+        pkgs.vimPlugins.nvim-web-devicons
 
-        (lua_plugin vimPlugins.telescope-nvim "telescope-nvim")
+        (lua_plugin pkgs.vimPlugins.telescope-nvim "telescope-nvim")
 
-        vimPlugins.neovim-sensible
-        vimPlugins.nvim-dap
-        vimPlugins.nvim-neoclip-lua
-        vimPlugins.nvim-surround
-        vimPlugins.nvim-tree-lua
-        vimPlugins.popup-nvim
+        pkgs.vimPlugins.neovim-sensible
+        pkgs.vimPlugins.nvim-dap
+        pkgs.vimPlugins.nvim-neoclip-lua
+        pkgs.vimPlugins.nvim-surround
+        pkgs.vimPlugins.nvim-tree-lua
+        pkgs.vimPlugins.popup-nvim
       ];
     };
   };

@@ -12,6 +12,7 @@
 
     nixosModules = {
       fish.enable = true;
+      neovim.enable = true;
     };
 
     # Allow unfree packages
