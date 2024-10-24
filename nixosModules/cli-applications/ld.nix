@@ -1,5 +1,10 @@
-{ pkgs, lib, config, inputs, ... }: {
-
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}: {
   imports = [];
 
   options = {
@@ -13,5 +18,4 @@
 
     programs.nix-ld.enable = true;
   };
-
 }

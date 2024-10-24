@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }: {
-
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [];
 
   options = {
@@ -20,5 +24,4 @@
     # Enable KDE Connect
     services.kdeconnect.enable = true;
   };
-
 }

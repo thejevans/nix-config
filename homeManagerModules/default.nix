@@ -1,5 +1,10 @@
-{ pkgs, lib, config, home-manager, ... }: {
-
+{
+  pkgs,
+  lib,
+  config,
+  home-manager,
+  ...
+}: {
   imports = [
     ./gui-applications
     ./cli-applications
@@ -9,5 +14,4 @@
   options = {};
 
   config = {};
-
 }

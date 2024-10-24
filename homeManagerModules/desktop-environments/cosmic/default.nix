@@ -1,5 +1,10 @@
-{ config, pkgs, lib, home-manager, ... }: {
-
+{
+  config,
+  pkgs,
+  lib,
+  home-manager,
+  ...
+}: {
   imports = [];
 
   options = {
@@ -9,5 +14,4 @@
   config = lib.mkIf config.homeManagerModules.cosmic.enable {
     home.file.".config/cosmic-comp/config.ron".source = ./config.ron;
   };
-
 }

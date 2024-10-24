@@ -1,5 +1,10 @@
-{config, pkgs, lib, home-manager, ... }: {
-
+{
+  config,
+  pkgs,
+  lib,
+  home-manager,
+  ...
+}: {
   imports = [];
 
   options = {
@@ -78,6 +83,4 @@
       };
     };
   };
-
 }
-

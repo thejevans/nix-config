@@ -1,6 +1,11 @@
-{ pkgs, config, ... }: {
-
-  imports = [];
+{
+  pkgs,
+  config,
+  ...
+}: {
+  imports = [
+    ./single-disk-zfs-impermanence-disko.nix
+  ];
 
   options = {};
 
@@ -8,6 +13,8 @@
     time.timeZone = "${config.globalConfig.timeZone}";
 
     networking.hostName = "${config.globalConfig.host}";
+
+    security.sudo.wheelNeedsPassword = false;
 
     # Select internationalisation properties.
     i18n.defaultLocale = "en_US.UTF-8";
@@ -30,7 +37,8 @@
       description = "${config.globalConfig.fullName}";
       home = "/home/${config.globalConfig.user}";
       group = "${config.globalConfig.user}";
-      extraGroups = [ "networkmanager" "wheel" "uinput" ];
+      extraGroups = ["networkmanager" "wheel" "uinput"];
+      initialHashedPassword = "$6$ufjdtxndzMLi8EdS$EiHeZ.0qA6.Ik4vlcSY74QDekPLDMfrepgsnh7fZhW70uwJChg4aewQncrbXuxkWN.YeYSJdiyyLi8dq.nVAv/";
     };
 
     nixosModules.${config.globalConfig.desktopEnvironment}.enable = true;
@@ -46,7 +54,7 @@
     users.groups.${config.globalConfig.user} = {};
 
     # Enable flakes.
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.settings.experimental-features = ["nix-command" "flakes"];
 
     environment.sessionVariables.FLAKE = "/home/${config.globalConfig.user}/git_repos/nix-config";
 

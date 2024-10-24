@@ -1,14 +1,17 @@
-{ pkgs, lib, config, home-manager, ... }: {
-
+{
+  pkgs,
+  lib,
+  config,
+  home-manager,
+  ...
+}: {
   imports = [
     ./plasma6.nix
-    ./hyprland.nix
-
     ./cosmic
+    ./sway
   ];
 
   options = {};
 
   config = {};
-
 }

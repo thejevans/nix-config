@@ -1,5 +1,10 @@
-{ inputs, config, pkgs, lib, ... }: {
-
+{
+  inputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.apple-macbook-air-4
@@ -8,8 +13,12 @@
   options = {};
 
   config = {
-    # Add support for backlight
-    boot.kernelParams = [ "acpi_backlight=video" ];
-  };
+    singleDiskZfsImpermanenceDisko = {
+      enable = true;
+      device = "/dev/nvme0n1";
+    };
 
+    # Add support for backlight
+    boot.kernelParams = ["acpi_backlight=video"];
+  };
 }

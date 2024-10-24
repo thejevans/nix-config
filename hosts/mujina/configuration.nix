@@ -1,5 +1,10 @@
-{ pkgs, lib, inputs, ... }: {
-
+{
+  pkgs,
+  lib,
+  inputs,
+  config,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.framework-12th-gen-intel
@@ -8,6 +13,11 @@
   options = {};
 
   config = {
+    singleDiskZfsImpermanenceDisko = {
+      enable = true;
+      device = "/dev/nvme0n1";
+    };
+
     services.tlp = {
       enable = true;
       settings = {

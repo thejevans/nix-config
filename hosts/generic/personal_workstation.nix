@@ -1,22 +1,24 @@
-{ config, pkgs, lib, inputs, ... }:
-
 {
-
+  config,
+  pkgs,
+  ...
+}: {
   imports = [];
 
   options = {};
 
   config = {
-    services.avahi.enable = true;
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     nixosModules = {
       fish.enable = true;
+      neovim.enable = true;
     };
 
     # Allow unfree packages
     nixpkgs.config = {
       allowUnfree = true;
-      permittedInsecurePackages = [ "electron-24.8.6" ];
+      permittedInsecurePackages = ["electron-24.8.6"];
     };
 
     environment.systemPackages = with pkgs; [
@@ -30,11 +32,28 @@
       ntfs3g
     ];
 
+    services.udev.packages = [
+      pkgs.platformio-core.udev
+      pkgs.openocd
+    ];
+
     # Enable networking
     networking.networkmanager.enable = true;
 
     # Enable CUPS to print documents.
-    services.printing.enable = true;
+    services.printing = {
+      enable = true;
+      drivers = [pkgs.gutenprint pkgs.brlaser];
+    };
+
+    services.avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
+
+    # Enable Flatpak
+    services.flatpak.enable = true;
 
     # Enable sound with pipewire.
     sound.enable = true;
@@ -52,8 +71,9 @@
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
+    stylix.enable = true;
     stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
     stylix.image = ./nixos-wallpaper.png;
 
@@ -74,15 +94,15 @@
 
     stylix.fonts = {
       monospace = {
-        package = pkgs.nerdfonts.override { fonts = [ "Hack" ]; };
+        package = pkgs.nerdfonts.override {fonts = ["Hack"];};
         name = "Hack Nerd Font Mono";
       };
       sansSerif = {
-        package = pkgs.nerdfonts.override { fonts = [ "Hack" ]; };
+        package = pkgs.nerdfonts.override {fonts = ["Hack"];};
         name = "Hack Nerd Font";
       };
       serif = {
-        package = pkgs.nerdfonts.override { fonts = [ "Tinos" ]; };
+        package = pkgs.nerdfonts.override {fonts = ["Tinos"];};
         name = "Tinos Nerd Font";
       };
 

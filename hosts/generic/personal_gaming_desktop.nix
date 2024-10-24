@@ -1,7 +1,10 @@
-{ config, pkgs, lib, inputs, ... }:
-
 {
-
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   imports = [
     ./personal_workstation.nix
   ];
@@ -16,5 +19,4 @@
 
     services.hardware.openrgb.enable = true;
   };
-
 }
