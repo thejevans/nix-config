@@ -4,7 +4,7 @@
 
   options = {};
 
-  config = {
+  config = lib.mkIf config.homeManagerModules.sway.enable {
     services.swaync = {
       enable = true;
 
