@@ -148,6 +148,7 @@
             tooltip = false;
             format = " {usage}%";
             format-alt = " {load}";
+            on-click = "${pkgs.alacritty}/bin/alacritty --title nmtui-popup -o font.size=10 -o window.dimensions.columns=80 -o window.dimensions.lines=35 -e ${pkgs.btop}/bin/btop";
 
             states = {
               warning = 70;
@@ -161,6 +162,7 @@
             format = " {percentage}%";
             tooltip = " {used:0.1f}G/{total:0.1f}G";
 
+            on-click = "${pkgs.alacritty}/bin/alacritty --title nmtui-popup -o font.size=10 -o window.dimensions.columns=80 -o window.dimensions.lines=35 -e ${pkgs.btop}/bin/btop";
             states = {
               warning = 70;
               critical = 90;

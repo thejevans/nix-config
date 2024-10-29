@@ -202,3 +202,23 @@ menu menuitem:only-child {
     color: @base05;
   }
 }
+
+#battery.warning:not(.charging) {
+    /*background: #f53c3c;*/
+    color: yellow;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#battery.critical:not(.charging) {
+    /*background: #f53c3c;*/
+    color: red;
+    animation-name: blink;
+    animation-duration: 0.3s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
