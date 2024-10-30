@@ -52,6 +52,7 @@
       xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
       pinta
+      cura
 
       # devenv
       cachix
