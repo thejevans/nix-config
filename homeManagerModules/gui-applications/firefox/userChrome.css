@@ -169,6 +169,7 @@ See the above repository for updates as well as full license text. */
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar {
   min-width: 260px !important;
   max-width: 260px !important;
+  margin-right: -256px;
   z-index: 1;
 }
 
