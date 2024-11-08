@@ -199,13 +199,15 @@ menu menuitem:only-child {
 /* Keyframes */
 @keyframes blink {
   to {
+    background: @base00;
     color: @base05;
   }
 }
 
 #battery.warning:not(.charging) {
     /*background: #f53c3c;*/
-    color: yellow;
+    background: yellow;
+    color: black;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: steps(12);
@@ -215,7 +217,8 @@ menu menuitem:only-child {
 
 #battery.critical:not(.charging) {
     /*background: #f53c3c;*/
-    color: red;
+    background: red;
+    color: black;
     animation-name: blink;
     animation-duration: 0.3s;
     animation-timing-function: steps(12);
