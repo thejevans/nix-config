@@ -55,6 +55,7 @@
       xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
       pinta
+      gitkraken
 
       # devenv
       cachix
