@@ -56,6 +56,7 @@
       xdg-desktop-portal-gtk
       pinta
       gitkraken
+      orca-slicer
 
       # devenv
       cachix
