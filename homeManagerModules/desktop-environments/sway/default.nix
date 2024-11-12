@@ -14,7 +14,13 @@
   };
 
   config = lib.mkIf config.homeManagerModules.sway.enable {
-    home.packages = with pkgs; [wofi swayosd khal];
+    home.packages = with pkgs; [
+      wofi
+      swayosd
+      khal
+      wlr-randr
+      wdisplays
+    ];
 
     # Enable KDE Connect
     services.kdeconnect.enable = true;

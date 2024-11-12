@@ -142,7 +142,7 @@
         user = "thejevans";
         fullName = "John Evans";
         timeZone = "America/Denver";
-        desktopEnvironment = "plasma6";
+        desktopEnvironment = "sway";
         deviceClass = "personal_gaming_desktop";
         stateVersion = "23.11";
         gpu = "amdgpu";

@@ -37,6 +37,7 @@
       fd
       sqlite
       btop
+      jq
 
       # gui
       darktable
