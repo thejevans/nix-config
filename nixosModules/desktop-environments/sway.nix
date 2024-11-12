@@ -17,7 +17,7 @@
       slurp # screenshots
       wl-clipboard # copy and paste
       mako # notifications
-      pkgs.pulseaudio #needed for pactl
+      pulseaudio #needed for pactl
       polkit_gnome # for elevating GUI apps
     ];
 
@@ -68,6 +68,19 @@
       };
     };
 
+    # systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    #   description = "polkit-gnome-authentication-agent-1";
+    #   wantedBy = ["graphical-session.target"];
+    #   wants = ["graphical-session.target"];
+    #   after = ["graphical-session.target"];
+    #   serviceConfig = {
+    #     Type = "simple";
+    #     ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+    #     Restart = "on-failure";
+    #     RestartSec = 1;
+    #     TimeoutStopSec = 10;
+    #   };
+    # };
     # backlight control
     # programs.light.enable = true;
 
