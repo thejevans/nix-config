@@ -29,7 +29,7 @@
       (pkgs.writeShellApplication {
         name = "to_couch";
 
-        runtimeInputs = [ pkgs.wlr-randr pkgs.jq ];
+        runtimeInputs = [pkgs.wlr-randr pkgs.jq];
 
         text = ''
           export WAYLAND_DISPLAY=wayland-1
@@ -45,7 +45,7 @@
       (pkgs.writeShellApplication {
         name = "to_desk";
 
-        runtimeInputs = [ pkgs.wlr-randr pkgs.jq ];
+        runtimeInputs = [pkgs.wlr-randr pkgs.jq];
 
         text = ''
           export WAYLAND_DISPLAY=wayland-1
