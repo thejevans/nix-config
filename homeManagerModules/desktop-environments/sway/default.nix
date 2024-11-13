@@ -41,6 +41,12 @@
       swayosd_client = args: "exec '" + lib.getExe' pkgs.swayosd "swayosd_client" + " " + args + "'";
     in {
       enable = true;
+
+      systemd = {
+        enable = true;
+        variables = [ "--all" ];
+      };
+
       config = {
         modifier = "Mod4";
         terminal = lib.getExe pkgs.alacritty;
@@ -90,6 +96,10 @@
             "XF86MonBrightnessDown" = swayosd_client " --brightness lower";
           };
       };
+
+      extraConfig = ''
+        for_window [title="popup"] floating enable
+      '';
     };
   };
 }

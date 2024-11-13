@@ -14,7 +14,17 @@
       systemd.enable = true;
       systemd.target = "graphical-session.target";
 
-      settings = [
+      settings = let
+        alacritty_popup = exe: cols: lines: (
+          lib.getExe pkgs.alacritty
+          + " --title popup -o font.size=10 -o window.dimensions.columns="
+          + cols
+          + " -o window.dimensions.lines="
+          + lines
+          + " -e "
+          + exe
+        );
+      in [
         {
           layer = "top";
           position = "top";
@@ -50,13 +60,13 @@
           "custom/nixlogo" = {
             format = "";
             tooltip = false;
-            on-click = "${pkgs.wofi}/bin/wofi --show drun";
+            on-click = lib.getExe pkgs.wofi + " --show drun";
           };
 
           "image#nixlogo" = {
             path = ./Nix_Logo.svg;
             tooltip = false;
-            on-click = "${pkgs.wofi}/bin/wofi --show drun";
+            on-click = lib.getExe pkgs.wofi + " --show drun";
           };
 
           # Workspaces
@@ -77,7 +87,7 @@
           # Clock & Calendar
           clock = {
             format = "{:%a %b %d, %H:%M}";
-            on-click = "${pkgs.alacritty}/bin/alacritty --title nmtui-popup -o font.size=10 -o window.dimensions.columns=80 -o window.dimensions.lines=35 -e ${pkgs.khal}/bin/khal";
+            on-click = alacritty_popup (lib.getExe' pkgs.khal "khal") "80" "35";
 
             actions = {
               on-scroll-down = "shift_down";
@@ -93,12 +103,14 @@
           };
 
           # Notifications
-          "custom/notification" = {
-            exec = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
+          "custom/notification" = let
+            swaync-client = args: lib.getExe' pkgs.swaynotificationcenter "swaync-client" + " " + args;
+          in {
+            exec = swaync-client "-swb";
             return-type = "json";
             format = "{icon}";
-            on-click = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
-            on-click-right = "${pkgs.swaynotificationcenter}/bin/swaync-client -d -sw";
+            on-click = swaync-client "-t -sw";
+            on-click-right = swaync-client "-d -sw";
             escape = true;
 
             format-icons = {
@@ -114,16 +126,18 @@
           };
 
           # Pulseaudio
-          pulseaudio = {
+          pulseaudio = let
+            pactl = args: lib.getExe' pkgs.pulseaudio "pactl" + " " + args;
+          in {
             format = "{volume} {icon} / {format_source}";
             format-source = "󰍬";
             format-source-muted = "󰍭";
             format-muted = "󰖁 / {format_source}";
             format-icons = {default = ["󰕿" "󰖀" "󰕾"];};
-            on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
-            on-click-right = "${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
-            on-scroll-up = "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +1%";
-            on-scroll-down = "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -1%";
+            on-click = lib.getExe pkgs.pavucontrol;
+            on-click-right = pactl "set-sink-mute @DEFAULT_SINK@ toggle";
+            on-scroll-up = pactl "set-sink-volume @DEFAULT_SINK@ +1%";
+            on-scroll-down = pactl "set-sink-volume @DEFAULT_SINK@ -1%";
             tooltip = false;
           };
 
@@ -148,7 +162,7 @@
             tooltip = false;
             format = " {usage}%";
             format-alt = " {load}";
-            on-click = "${pkgs.alacritty}/bin/alacritty --title nmtui-popup -o font.size=10 -o window.dimensions.columns=80 -o window.dimensions.lines=35 -e ${pkgs.btop}/bin/btop";
+            on-click = alacritty_popup (lib.getExe pkgs.btop) "80" "35";
 
             states = {
               warning = 70;
@@ -162,7 +176,7 @@
             format = " {percentage}%";
             tooltip = " {used:0.1f}G/{total:0.1f}G";
 
-            on-click = "${pkgs.alacritty}/bin/alacritty --title nmtui-popup -o font.size=10 -o window.dimensions.columns=80 -o window.dimensions.lines=35 -e ${pkgs.btop}/bin/btop";
+            on-click = alacritty_popup (lib.getExe pkgs.btop) "80" "35";
             states = {
               warning = 70;
               critical = 90;
@@ -178,7 +192,7 @@
             tooltip-format-wifi = "WiFi: {essid} ({signalStrength}%)\n {bandwidthUpBytes}  {bandwidthDownBytes}";
             tooltip-format-ethernet = "Ethernet: {ifname}\n {bandwidthUpBytes}  {bandwidthDownBytes}";
             tooltip-format-disconnected = "Disconnected";
-            on-click = "${pkgs.alacritty}/bin/alacritty --title nmtui-popup -o font.size=10 -o window.dimensions.columns=80 -o window.dimensions.lines=35 -e ${pkgs.networkmanager}/sbin/nmtui";
+            on-click = alacritty_popup (lib.getExe' pkgs.networkmanager "nmtui") "80" "35";
             interval = 5;
           };
         }
