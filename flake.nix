@@ -2,21 +2,41 @@
   description = "NixOS configuration with flakes";
 
   inputs = {
-    nur.url = "github:nix-community/NUR";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+
+    # nix user repository. used for firefox config
+    nur.url = "github:nix-community/NUR";
+
+    # contains premade configurations for laptop hardware
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    # for patching dynamically loaded libraries
     nix-alien.url = "github:thiagokokada/nix-alien";
+
+    # helps to keep colors and themes consistent across apps
     stylix.url = "github:danth/stylix/cf8b6e2d4e8aca8ef14b839a906ab5eb98b08561";
+    
+    # adds functionality to have ephemeral root
     impermanence.url = "github:nix-community/impermanence";
+
+    # for building filesystem from configuration
     disko.url = "github:nix-community/disko";
 
+    # for managing userspace environment
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # temporary repo for cosmic de while it's in alpha
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # adds command-not-found
+    flake-programs-sqlite = {
+      url = "github:wamserma/flake-programs-sqlite";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -86,6 +106,7 @@
           inputs.stylix.nixosModules.stylix
           inputs.impermanence.nixosModules.impermanence
           inputs.disko.nixosModules.disko
+          inputs.flake-programs-sqlite.nixosModules.programs-sqlite
 
           {nixpkgs.overlays = [nur.overlay];}
 

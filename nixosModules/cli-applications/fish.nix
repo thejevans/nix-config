@@ -13,5 +13,8 @@
   config = lib.mkIf config.nixosModules.fish.enable {
     users.users.${config.globalConfig.user}.shell = pkgs.fish;
     programs.fish.enable = true;
+
+    # fix man pages taking forever
+    documentation.man.generateCaches = false;
   };
 }
