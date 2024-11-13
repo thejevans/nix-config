@@ -98,6 +98,8 @@
 
       extraConfig = ''
         for_window [title="popup"] floating enable
+        for_window [title="Extension: (Bitwarden Password Manager)*"] floating enable
+        for_window [title="Volume Control"] floating enable
       '';
     };
   };
