@@ -11,13 +11,17 @@
   options = {};
 
   config = {
-    services.thermald.enable = true;
-    services.power-profiles-daemon.enable = false;
-    services.fwupd.enable = true;
-    services.sshd.enable = true;
+    services = {
+      thermald.enable = true;
+      power-profiles-daemon.enable = false;
+      fwupd.enable = true;
+      sshd.enable = true;
+    };
 
-    hardware.bluetooth.enable = true;
-    hardware.bluetooth.powerOnBoot = true;
+    hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
 
     networking.interfaces.enp6s0.wakeOnLan.enable = true;
 

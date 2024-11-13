@@ -38,13 +38,13 @@
 
     wayland.windowManager.sway = let
       swaymsg = msg: lib.getExe' pkgs.sway "swaymsg" + " \"" + msg + "\"";
-      swayosd_client = args: "exec '" + lib.getExe' pkgs.swayosd "swayosd_client" + " " + args + "'";
+      swayosd_client = args: "exec '" + lib.getExe' pkgs.swayosd "swayosd-client" + " " + args + "'";
     in {
       enable = true;
 
       systemd = {
         enable = true;
-        variables = [ "--all" ];
+        variables = ["--all"];
       };
 
       config = {
@@ -76,14 +76,13 @@
         in
           lib.mkOptionDefault {
             # Screenshot utility
-            "${mod}+p" = (
+            "${mod}+p" =
               "exec "
               + lib.getExe pkgs.grim
               + " -g \"$("
               + lib.getExe pkgs.slurp
               + ")\" - | tee \"$HOME/Pictures/Screenshots\"/\"Screenshot_$(date +%Y%m%d-%H%M%S).png\" | "
-              + lib.getExe' pkgs.wl-clipboard "wl-copy"
-            );
+              + lib.getExe' pkgs.wl-clipboard "wl-copy";
 
             # Control volume
             "XF86AudioRaiseVolume" = swayosd_client "--output-volume raise";

@@ -13,11 +13,16 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod"];
-  boot.initrd.kernelModules = ["i915"];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
-  boot.kernelParams = ["module_blacklist=hid_sensor_hub"];
+  boot = {
+    kernelModules = ["kvm-intel"];
+    extraModulePackages = [];
+    kernelParams = ["module_blacklist=hid_sensor_hub"];
+
+    initrd = {
+      availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod"];
+      kernelModules = ["i915"];
+    };
+  };
 
   swapDevices = [];
 

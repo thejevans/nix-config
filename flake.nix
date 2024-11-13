@@ -15,7 +15,7 @@
 
     # helps to keep colors and themes consistent across apps
     stylix.url = "github:danth/stylix/cf8b6e2d4e8aca8ef14b839a906ab5eb98b08561";
-    
+
     # adds functionality to have ephemeral root
     impermanence.url = "github:nix-community/impermanence";
 
@@ -120,14 +120,16 @@
 
           home-manager.nixosModules.home-manager
           {
-            home-manager.extraSpecialArgs = {
-              inherit inputs user desktopEnvironment stateVersion host;
-            };
+            home-manager = {
+              extraSpecialArgs = {
+                inherit inputs user desktopEnvironment stateVersion host;
+              };
 
-            home-manager.useUserPackages = true;
-            home-manager.useGlobalPkgs = true;
-            home-manager.users.${user} = import (./home + "/${deviceClass}.nix");
-            home-manager.backupFileExtension = "backup";
+              useUserPackages = true;
+              useGlobalPkgs = true;
+              users.${user} = import (./home + "/${deviceClass}.nix");
+              backupFileExtension = "backup";
+            };
           }
         ];
       };

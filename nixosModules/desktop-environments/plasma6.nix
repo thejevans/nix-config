@@ -33,44 +33,50 @@
       ];
     };
 
-    # Enable the X11 windowing system.
-    services.xserver.enable = true;
+    services = {
+      # Enable the X11 windowing system.
+      xserver.enable = true;
 
-    # Enable the KDE Plasma Desktop Environment.
-    services.displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
+      # Enable the KDE Plasma Desktop Environment.
+      displayManager.sddm = {
+        enable = true;
+        wayland.enable = true;
+      };
+
+      displayManager.defaultSession = "plasma";
+      desktopManager.plasma6.enable = true;
+
+      # Configure keymap in X11
+      xserver.xkb = {
+        layout = "us";
+        variant = "";
+      };
+
+      # Enable touchpad support (enabled default in most desktopManager).
+      # xserver.libinput.enable = true;
     };
-
-    services.displayManager.defaultSession = "plasma";
-    services.desktopManager.plasma6.enable = true;
 
     # Automatically authenticate KDEWallet
     # DOESN'T WORK
     security.pam.services.kde.kwallet.enable = true;
 
     # Open ports for KDEConnect
-    networking.firewall.allowedTCPPortRanges = [
-      {
-        from = 1714;
-        to = 1764;
-      }
-    ];
-    networking.firewall.allowedUDPPortRanges = [
-      {
-        from = 1714;
-        to = 1764;
-      }
-    ];
-    networking.firewall.allowedTCPPorts = [8010];
+    networking.firewall = {
+      allowedTCPPortRanges = [
+        {
+          from = 1714;
+          to = 1764;
+        }
+      ];
 
-    # Configure keymap in X11
-    services.xserver.xkb = {
-      layout = "us";
-      variant = "";
+      allowedUDPPortRanges = [
+        {
+          from = 1714;
+          to = 1764;
+        }
+      ];
+
+      allowedTCPPorts = [8010];
     };
-
-    # Enable touchpad support (enabled default in most desktopManager).
-    # services.xserver.libinput.enable = true;
   };
 }

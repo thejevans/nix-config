@@ -121,35 +121,42 @@ in {
 
   config = lib.mkIf config.singleDiskZfsImpermanenceDisko.enable {
     disko.devices = {
-      disk.main = main_disk {device = config.singleDiskZfsImpermanenceDisko.device;};
+      disk.main = main_disk {inherit (config.singleDiskZfsImpermanenceDisko) device;};
       zpool.rpool = rpool_zfs_pool;
     };
 
-    boot.initrd.systemd.enable = true;
-    boot.swraid.enable = false;
+    services.zfs = {
+      trim.enable = true;
+      autoScrub.enable = true;
+    };
 
-    services.zfs.trim.enable = true;
-    services.zfs.autoScrub.enable = true;
+    boot = {
+      swraid.enable = false;
 
-    boot.initrd.systemd.services.rollback = {
-      description = "";
-      wantedBy = [
-        "initrd.target"
-      ];
-      after = [
-        "zfs-import-rpool.service"
-      ];
-      before = [
-        "sysroot.mount"
-      ];
-      path = with pkgs; [
-        zfs
-      ];
-      unitConfig.DefaultDependencies = "no";
-      serviceConfig.Type = "oneshot";
-      script = ''
-        zfs rollback -r rpool/local/root@blank && echo "  >> >> rollback complete << <<"
-      '';
+      initrd.systemd = {
+        enable = true;
+
+        services.rollback = {
+          description = "";
+          wantedBy = [
+            "initrd.target"
+          ];
+          after = [
+            "zfs-import-rpool.service"
+          ];
+          before = [
+            "sysroot.mount"
+          ];
+          path = with pkgs; [
+            zfs
+          ];
+          unitConfig.DefaultDependencies = "no";
+          serviceConfig.Type = "oneshot";
+          script = ''
+            zfs rollback -r rpool/local/root@blank && echo "  >> >> rollback complete << <<"
+          '';
+        };
+      };
     };
 
     fileSystems = {

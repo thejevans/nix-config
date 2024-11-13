@@ -11,18 +11,39 @@
   };
 
   config = lib.mkIf config.nixosModules.gaming.enable {
-    hardware.opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
+    hardware = {
+      nvidia.modesetting.enable = lib.mkIf (config.globalConfig.gpu == "nvidia") true;
+
+      opengl = {
+        enable = true;
+        driSupport = true;
+        driSupport32Bit = true;
+      };
     };
 
-    services.xserver.videoDrivers = lib.mkIf (config.globalConfig.gpu != "integrated") [config.globalConfig.gpu];
-    hardware.nvidia.modesetting.enable = lib.mkIf (config.globalConfig.gpu == "nvidia") true;
+    services = {
+      xserver.videoDrivers = lib.mkIf (config.globalConfig.gpu != "integrated") [config.globalConfig.gpu];
 
-    programs.steam = {
-      enable = true;
-      gamescopeSession.enable = true;
+      avahi.publish = {
+        enable = true;
+        userServices = true;
+      };
+
+      pipewire.extraConfig.pipewire."92-low-latency".context.properties.default.clock = {
+        rate = 48000;
+        quantum = 32;
+        min-quantum = 32;
+        max-quantum = 32;
+      };
+    };
+
+    programs = {
+      gamemode.enable = true;
+
+      steam = {
+        enable = true;
+        gamescopeSession.enable = true;
+      };
     };
 
     environment.systemPackages = with pkgs; [
@@ -44,9 +65,6 @@
       capabilities = "cap_sys_admin+p";
       source = "${pkgs.sunshine}/bin/sunshine";
     };
-
-    services.avahi.publish.enable = true;
-    services.avahi.publish.userServices = true;
 
     # sunshine networking settings
     networking.firewall = {
@@ -72,8 +90,6 @@
       };
     };
 
-    programs.gamemode.enable = true;
-
     # steam launch options
     # gamemoderun %command%
     # mangohud %command%
@@ -83,15 +99,6 @@
 
     environment.sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/${config.globalConfig.user}/.steam/root/compatibilitytools.d";
-    };
-
-    services.pipewire.extraConfig.pipewire."92-low-latency" = {
-      context.properties = {
-        default.clock.rate = 48000;
-        default.clock.quantum = 32;
-        default.clock.min-quantum = 32;
-        default.clock.max-quantum = 32;
-      };
     };
   };
 }

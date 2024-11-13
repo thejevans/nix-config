@@ -17,11 +17,18 @@
 
     programs.alacritty = {
       enable = true;
-      settings.shell.program = lib.mkIf config.homeManagerModules.fish.enable "fish";
-      settings.window.decorations = "none";
-      settings.window.padding = {
-        x = 5;
-        y = 2;
+
+      settings = {
+        shell.program = lib.mkIf config.homeManagerModules.fish.enable "fish";
+
+        window = {
+          decorations = "none";
+
+          padding = {
+            x = 5;
+            y = 2;
+          };
+        };
       };
     };
   };
