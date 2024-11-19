@@ -1,3 +1,6 @@
+> [!NOTE]
+> This repo is no longer maintained. All future development has moved to [codeberg.org/jevans/nix-config](https://codeberg.org/jevans/nix-config)
+
 # nix-config
 
 My configuration for the Nix package manager and operating system.
